@@ -23,7 +23,14 @@ dotenv.config();
 const app = express();
 
 // ================= MIDDLEWARE =================
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://abhishekshankar.in",
+    "https://www.abhishekshankar.in"
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Portfolio routes
