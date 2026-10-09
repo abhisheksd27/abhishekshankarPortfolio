@@ -181,8 +181,9 @@ function Contact() {
 
 const page = {
   minHeight: "100vh",
-  background: "#f8fafc",
-  padding: "24px 16px"
+  background: "#080c14",
+  color: "#f8fafc",
+  padding: "32px 20px 80px"
 };
 
 const wrapper = {
@@ -191,27 +192,29 @@ const wrapper = {
 };
 
 const header = {
-  marginBottom: "24px"
+  marginBottom: "28px"
 };
 
 const title = {
   fontSize: "2rem",
-  fontWeight: 700,
-  color: "#111827",
-  marginBottom: "8px"
+  fontWeight: 800,
+  color: "#f8fafc",
+  marginBottom: "8px",
+  letterSpacing: "-0.02em"
 };
 
 const subtitle = {
-  color: "#6b7280",
-  lineHeight: 1.6
+  color: "#94a3b8",
+  lineHeight: 1.6,
+  fontSize: "0.95rem"
 };
 
 const card = {
-  background: "#ffffff",
-  border: "1px solid #e5e7eb",
+  background: "rgba(17, 24, 39, 0.75)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
   borderRadius: "16px",
-  padding: "20px",
-  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.05)"
+  padding: "24px",
+  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const grid = {
@@ -228,39 +231,39 @@ const field = {
 };
 
 const label = {
-  fontSize: "0.95rem",
-  fontWeight: 500,
-  color: "#374151"
+  fontSize: "0.88rem",
+  fontWeight: 600,
+  color: "#cbd5e1"
 };
 
 const input = {
   width: "100%",
   padding: "12px 14px",
   borderRadius: "10px",
-  border: "1px solid #d1d5db",
+  border: "1px solid rgba(255, 255, 255, 0.12)",
+  background: "rgba(15, 23, 42, 0.8)",
+  color: "#f8fafc",
   fontSize: "0.95rem",
-  outline: "none",
-  background: "#fff",
-  color: "#111827"
+  outline: "none"
 };
 
 const previewCard = {
-  background: "#f9fafb",
-  border: "1px solid #e5e7eb",
+  background: "rgba(17, 24, 39, 0.6)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
   borderRadius: "14px",
-  padding: "18px",
-  marginBottom: "20px"
+  padding: "20px",
+  marginBottom: "22px"
 };
 
 const previewTitle = {
-  fontSize: "1.05rem",
-  fontWeight: 600,
-  color: "#111827",
+  fontSize: "1.1rem",
+  fontWeight: 700,
+  color: "#93c5fd",
   marginBottom: "12px"
 };
 
 const previewLine = {
-  color: "#374151",
+  color: "#cbd5e1",
   marginBottom: "8px",
   lineHeight: 1.6
 };
@@ -273,9 +276,10 @@ const previewLinks = {
 };
 
 const link = {
-  color: "#2563eb",
+  color: "#60a5fa",
   textDecoration: "none",
-  fontWeight: 500
+  fontWeight: 600,
+  fontSize: "0.9rem"
 };
 
 const buttonRow = {
@@ -285,13 +289,14 @@ const buttonRow = {
 };
 
 const saveButton = {
-  padding: "12px 18px",
+  padding: "12px 24px",
   borderRadius: "10px",
   border: "none",
-  background: "#111827",
+  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
   color: "#fff",
   fontWeight: 600,
-  cursor: "pointer"
+  cursor: "pointer",
+  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 export default Contact;

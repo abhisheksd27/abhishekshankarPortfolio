@@ -144,3 +144,14 @@
     text-align: center;
   }
 }
+
+/* ================= GLOBAL ADMIN DARK MODE ================= */
+body:has(.admin-navbar),
+body:has(.admin-header) {
+  background-color: #080c14 !important;
+  color: #f8fafc !important;
+}
+
+input, textarea, select {
+  color-scheme: dark;
+}

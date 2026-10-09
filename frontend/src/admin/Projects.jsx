@@ -244,8 +244,9 @@ function Projects() {
 
 const page = {
   minHeight: "100vh",
-  background: "#f8fafc",
-  padding: "24px 16px"
+  background: "#080c14",
+  color: "#f8fafc",
+  padding: "32px 20px 80px"
 };
 
 const wrapper = {
@@ -254,28 +255,30 @@ const wrapper = {
 };
 
 const header = {
-  marginBottom: "24px"
+  marginBottom: "28px"
 };
 
 const title = {
   fontSize: "2rem",
-  fontWeight: 700,
-  color: "#111827",
-  marginBottom: "8px"
+  fontWeight: 800,
+  color: "#f8fafc",
+  marginBottom: "8px",
+  letterSpacing: "-0.02em"
 };
 
 const subtitle = {
-  color: "#6b7280",
-  lineHeight: 1.6
+  color: "#94a3b8",
+  lineHeight: 1.6,
+  fontSize: "0.95rem"
 };
 
 const formCard = {
-  background: "#ffffff",
-  border: "1px solid #e5e7eb",
+  background: "rgba(17, 24, 39, 0.75)",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
   borderRadius: "16px",
-  padding: "20px",
-  marginBottom: "28px",
-  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.05)"
+  padding: "24px",
+  marginBottom: "32px",
+  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const sectionHeader = {
@@ -284,13 +287,13 @@ const sectionHeader = {
   alignItems: "center",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "18px"
+  marginBottom: "20px"
 };
 
 const sectionTitle = {
-  fontSize: "1.2rem",
-  fontWeight: 600,
-  color: "#111827"
+  fontSize: "1.25rem",
+  fontWeight: 700,
+  color: "#f8fafc"
 };
 
 const formGrid = {
@@ -306,20 +309,20 @@ const field = {
 };
 
 const label = {
-  fontSize: "0.95rem",
-  fontWeight: 500,
-  color: "#374151"
+  fontSize: "0.88rem",
+  fontWeight: 600,
+  color: "#cbd5e1"
 };
 
 const input = {
   width: "100%",
   padding: "12px 14px",
   borderRadius: "10px",
-  border: "1px solid #d1d5db",
+  border: "1px solid rgba(255, 255, 255, 0.12)",
+  background: "rgba(15, 23, 42, 0.8)",
+  color: "#f8fafc",
   fontSize: "0.95rem",
-  outline: "none",
-  background: "#fff",
-  color: "#111827"
+  outline: "none"
 };
 
 const textarea = {
@@ -327,37 +330,40 @@ const textarea = {
   minHeight: "120px",
   padding: "12px 14px",
   borderRadius: "10px",
-  border: "1px solid #d1d5db",
+  border: "1px solid rgba(255, 255, 255, 0.12)",
+  background: "rgba(15, 23, 42, 0.8)",
+  color: "#f8fafc",
   fontSize: "0.95rem",
   outline: "none",
-  background: "#fff",
-  color: "#111827",
-  resize: "vertical"
+  resize: "vertical",
+  fontFamily: "inherit",
+  lineHeight: 1.6
 };
 
 const actionRow = {
-  marginTop: "18px",
+  marginTop: "20px",
   display: "flex",
   gap: "12px",
   flexWrap: "wrap"
 };
 
 const primaryButton = {
-  padding: "12px 18px",
+  padding: "12px 22px",
   borderRadius: "10px",
   border: "none",
-  background: "#111827",
+  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
   color: "#fff",
   fontWeight: 600,
-  cursor: "pointer"
+  cursor: "pointer",
+  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const secondaryButton = {
-  padding: "10px 14px",
-  borderRadius: "10px",
-  border: "1px solid #d1d5db",
-  background: "#fff",
-  color: "#111827",
+  padding: "10px 16px",
+  borderRadius: "8px",
+  border: "1px solid rgba(255, 255, 255, 0.15)",
+  background: "rgba(255, 255, 255, 0.05)",
+  color: "#cbd5e1",
   fontWeight: 500,
   cursor: "pointer"
 };
@@ -366,28 +372,29 @@ const listHeader = {
   display: "flex",
   alignItems: "center",
   gap: "12px",
-  marginBottom: "16px"
+  marginBottom: "20px"
 };
 
 const countBadge = {
-  background: "#e5e7eb",
-  color: "#111827",
+  background: "rgba(59, 130, 246, 0.15)",
+  color: "#93c5fd",
+  border: "1px solid rgba(59, 130, 246, 0.3)",
   borderRadius: "999px",
-  padding: "4px 10px",
+  padding: "3px 10px",
   fontSize: "0.85rem",
-  fontWeight: 600
+  fontWeight: 700
 };
 
 const emptyState = {
-  background: "#ffffff",
-  border: "1px dashed #d1d5db",
+  background: "rgba(17, 24, 39, 0.4)",
+  border: "1px dashed rgba(255, 255, 255, 0.1)",
   borderRadius: "16px",
-  padding: "32px",
+  padding: "36px",
   textAlign: "center"
 };
 
 const emptyText = {
-  color: "#6b7280"
+  color: "#94a3b8"
 };
 
 const cardGrid = {
@@ -397,28 +404,28 @@ const cardGrid = {
 };
 
 const projectCard = {
-  background: "#ffffff",
-  border: "1px solid #e5e7eb",
+  background: "rgba(17, 24, 39, 0.65)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
   borderRadius: "16px",
-  overflow: "hidden",
-  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.05)"
+  overflow: "hidden"
 };
 
 const projectCardBody = {
-  padding: "18px"
+  padding: "20px"
 };
 
 const projectTitle = {
-  fontSize: "1.1rem",
+  fontSize: "1.15rem",
   fontWeight: 700,
-  color: "#111827",
+  color: "#f8fafc",
   marginBottom: "10px"
 };
 
 const projectDescription = {
-  color: "#6b7280",
-  lineHeight: 1.7,
-  marginBottom: "14px"
+  color: "#cbd5e1",
+  lineHeight: 1.65,
+  marginBottom: "14px",
+  fontSize: "0.92rem"
 };
 
 const linkRow = {
@@ -429,9 +436,10 @@ const linkRow = {
 };
 
 const link = {
-  color: "#2563eb",
+  color: "#60a5fa",
   textDecoration: "none",
-  fontWeight: 500
+  fontWeight: 600,
+  fontSize: "0.88rem"
 };
 
 const buttonRow = {
@@ -441,21 +449,21 @@ const buttonRow = {
 };
 
 const editButton = {
-  padding: "10px 14px",
-  borderRadius: "10px",
-  border: "1px solid #d1d5db",
-  background: "#fff",
-  color: "#111827",
-  fontWeight: 500,
+  padding: "8px 16px",
+  borderRadius: "8px",
+  border: "1px solid rgba(255, 255, 255, 0.15)",
+  background: "rgba(255, 255, 255, 0.05)",
+  color: "#f8fafc",
+  fontWeight: 600,
   cursor: "pointer"
 };
 
 const deleteButton = {
-  padding: "10px 14px",
-  borderRadius: "10px",
-  border: "none",
-  background: "#dc2626",
-  color: "#fff",
+  padding: "8px 16px",
+  borderRadius: "8px",
+  border: "1px solid rgba(239, 68, 68, 0.3)",
+  background: "rgba(239, 68, 68, 0.12)",
+  color: "#fca5a5",
   fontWeight: 600,
   cursor: "pointer"
 };

@@ -180,8 +180,9 @@ function Skills() {
 
 const page = {
   minHeight: "100vh",
-  background: "#f8fafc",
-  padding: "24px 16px"
+  background: "#080c14",
+  color: "#f8fafc",
+  padding: "32px 20px 80px"
 };
 
 const wrapper = {
@@ -190,28 +191,30 @@ const wrapper = {
 };
 
 const header = {
-  marginBottom: "24px"
+  marginBottom: "28px"
 };
 
 const title = {
   fontSize: "2rem",
-  fontWeight: 700,
-  color: "#111827",
-  marginBottom: "8px"
+  fontWeight: 800,
+  color: "#f8fafc",
+  marginBottom: "8px",
+  letterSpacing: "-0.02em"
 };
 
 const subtitle = {
-  color: "#6b7280",
-  lineHeight: 1.6
+  color: "#94a3b8",
+  lineHeight: 1.6,
+  fontSize: "0.95rem"
 };
 
 const sectionCard = {
-  background: "#ffffff",
-  padding: "20px",
+  background: "rgba(17, 24, 39, 0.75)",
+  padding: "24px",
   borderRadius: "16px",
-  marginBottom: "18px",
-  border: "1px solid #e5e7eb",
-  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.05)"
+  marginBottom: "20px",
+  border: "1px solid rgba(255, 255, 255, 0.1)",
+  boxShadow: "0 10px 28px rgba(0, 0, 0, 0.25)"
 };
 
 const sectionHeader = {
@@ -224,31 +227,32 @@ const sectionHeader = {
 };
 
 const sectionTitle = {
-  fontSize: "1.15rem",
+  fontSize: "1.2rem",
   fontWeight: 700,
-  color: "#111827",
+  color: "#f8fafc",
   marginBottom: "4px"
 };
 
 const sectionSubtitle = {
-  color: "#6b7280",
-  fontSize: "0.92rem",
+  color: "#94a3b8",
+  fontSize: "0.88rem",
   lineHeight: 1.5
 };
 
 const countBadge = {
-  background: "#e5e7eb",
-  color: "#111827",
+  background: "rgba(59, 130, 246, 0.15)",
+  color: "#93c5fd",
+  border: "1px solid rgba(59, 130, 246, 0.3)",
   borderRadius: "999px",
-  padding: "4px 10px",
+  padding: "3px 10px",
   fontSize: "0.85rem",
-  fontWeight: 600
+  fontWeight: 700
 };
 
 const inputRow = {
   display: "flex",
   gap: "10px",
-  marginBottom: "14px",
+  marginBottom: "16px",
   flexWrap: "wrap"
 };
 
@@ -257,21 +261,22 @@ const inputStyle = {
   minWidth: "240px",
   padding: "12px 14px",
   borderRadius: "10px",
-  border: "1px solid #d1d5db",
-  background: "#fff",
-  color: "#111827",
+  border: "1px solid rgba(255, 255, 255, 0.12)",
+  background: "rgba(15, 23, 42, 0.8)",
+  color: "#f8fafc",
   fontSize: "0.95rem",
   outline: "none"
 };
 
 const buttonStyle = {
-  padding: "12px 16px",
+  padding: "12px 20px",
   border: "none",
   borderRadius: "10px",
-  background: "#111827",
+  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
   color: "#fff",
   fontWeight: 600,
-  cursor: "pointer"
+  cursor: "pointer",
+  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const tagWrap = {
@@ -284,11 +289,13 @@ const tagStyle = {
   display: "flex",
   alignItems: "center",
   gap: "8px",
-  padding: "10px 14px",
+  padding: "7px 14px",
   borderRadius: "999px",
-  background: "#f3f4f6",
-  color: "#111827",
-  fontSize: "0.95rem"
+  background: "rgba(59, 130, 246, 0.12)",
+  border: "1px solid rgba(59, 130, 246, 0.25)",
+  color: "#93c5fd",
+  fontSize: "0.88rem",
+  fontWeight: 500
 };
 
 const tagRemoveStyle = {
@@ -296,27 +303,29 @@ const tagRemoveStyle = {
   background: "transparent",
   cursor: "pointer",
   fontSize: "16px",
-  color: "#6b7280",
+  color: "#fca5a5",
   lineHeight: 1
 };
 
 const emptyText = {
-  color: "#6b7280",
-  fontSize: "0.95rem"
+  color: "#64748b",
+  fontSize: "0.9rem"
 };
 
 const saveRow = {
-  marginTop: "24px"
+  marginTop: "28px"
 };
 
 const saveButton = {
-  padding: "12px 18px",
+  padding: "13px 28px",
   borderRadius: "10px",
   border: "none",
-  background: "#111827",
+  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
   color: "#fff",
-  fontWeight: 600,
-  cursor: "pointer"
+  fontWeight: 700,
+  fontSize: "0.95rem",
+  cursor: "pointer",
+  boxShadow: "0 4px 16px rgba(37, 99, 235, 0.4)"
 };
 
 export default Skills;

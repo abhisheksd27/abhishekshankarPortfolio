@@ -1,18 +1,34 @@
 import { Link } from "react-router-dom";
 import "./admin.css";
 
-function AdminNavbar() {
+function AdminSidebar() {
   return (
-    <nav style={{ backgroundColor: "#1e1e1e", color: "#00ff00" }}>
-      <Link to="/admin/dashboard">Dashboard</Link>
-      <Link to="/admin/experience">Experience</Link>
-      <Link to="/admin/education">Education</Link>
-      <Link to="/admin/certification">Certification</Link>
-      <Link to="/admin/projects">Projects</Link>
-      <Link to="/admin/skills">Skills</Link>
-      <Link to="/admin/contact">Contact</Link>
+    <nav style={sidebarStyle}>
+      <Link to="/admin/dashboard" style={linkStyle}>Dashboard</Link>
+      <Link to="/admin/experience" style={linkStyle}>Experience</Link>
+      <Link to="/admin/education" style={linkStyle}>Education</Link>
+      <Link to="/admin/certification" style={linkStyle}>Certification</Link>
+      <Link to="/admin/projects" style={linkStyle}>Projects</Link>
+      <Link to="/admin/skills" style={linkStyle}>Skills</Link>
+      <Link to="/admin/contact" style={linkStyle}>Contact</Link>
     </nav>
   );
 }
 
-export default AdminNavbar;
+const sidebarStyle = {
+  backgroundColor: "#080c14",
+  borderRight: "1px solid rgba(255, 255, 255, 0.08)",
+  padding: "20px 16px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "8px"
+};
+
+const linkStyle = {
+  color: "#94a3b8",
+  textDecoration: "none",
+  padding: "8px 12px",
+  borderRadius: "8px"
+};
+
+export default AdminSidebar;
