@@ -3,66 +3,46 @@ import { motion } from "framer-motion";
 
 function Home() {
   return (
-    <div className="home-page">
+    <div className="portfolio-root">
+      <div className="background-grid" aria-hidden="true" />
       <Navbar />
 
-      {/* Flying birds */}
-      <div className="birds" aria-hidden="true">
-        <div className="bird bird-1"></div>
-        <div className="bird bird-2"></div>
-        <div className="bird bird-3"></div>
-        <div className="bird bird-4"></div>
-      </div>
-
       {/* Hero */}
-      <motion.section
-        className="home-hero"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.p
-          className="home-kicker"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-        >
-          Full Stack Developer
-        </motion.p>
-
-        <motion.h1
-          className="home-title"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.7 }}
-        >
-          Hi, I&apos;m <span>Abhishek Shankar</span> 👋
-        </motion.h1>
-
-        <motion.p
-          className="home-subtitle"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-        >
-          I build modern, scalable web applications with clean UI, strong backend
-          architecture, and polished user experiences.
-        </motion.p>
-
+      <section className="hero-section">
         <motion.div
-          className="home-actions"
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.7 }}
+          transition={{ duration: 0.6 }}
         >
-          <a href="/projects" className="home-btn primary-btn">
-            View Projects
-          </a>
-          <a href="/contact" className="home-btn secondary-btn">
-            Contact Me
-          </a>
+          <div className="hero-status">
+            <span className="status-indicator" />
+            <span>Associate Software Engineer @ Accenture</span>
+          </div>
+
+          <h1 className="hero-headline">
+            Hi, I&apos;m <span className="text-accent">Abhishek Shankar</span>.
+            <br />
+            <span className="text-gradient">
+              Building Resilient Data Pipelines & Secure Systems.
+            </span>
+          </h1>
+
+          <p className="hero-bio">
+            Associate Software Engineer at Accenture working in big data workflows,
+            ETL/ELT pipelines, and cloud computing. Passionate about turning complex datasets
+            into scalable intelligence while actively applying cybersecurity defense standards.
+          </p>
+
+          <div className="hero-actions">
+            <a href="/#projects" className="btn-primary">
+              View Projects
+            </a>
+            <a href="/#contact" className="btn-secondary">
+              Contact Me
+            </a>
+          </div>
         </motion.div>
-      </motion.section>
+      </section>
     </div>
   );
 }

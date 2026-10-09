@@ -1,11 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend server for Abhishek Shankar portfolio",
+  "main": "server.js",
   "scripts": {
-  "start": "node server.js"
-},
+    "start": "node server.js",
+    "create-admin": "node createAdmin.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
