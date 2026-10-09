@@ -128,134 +128,135 @@ function Dashboard() {
 
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
+  background: "#090a0f",
+  color: "#f4f4f5",
   padding: "32px 20px 80px"
 };
 
 const wrapper = {
-  maxWidth: "900px",
+  maxWidth: "860px",
   margin: "0 auto"
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px"
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em"
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem"
 };
 
 const card = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
   padding: "24px",
-  marginBottom: "28px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
+  marginBottom: "24px"
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
-  marginBottom: "18px"
+  gap: "6px",
+  marginBottom: "16px"
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1"
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8"
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
   outline: "none"
 };
 
 const textarea = {
   width: "100%",
   minHeight: "110px",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
   outline: "none",
   resize: "vertical",
   fontFamily: "inherit",
-  lineHeight: 1.6
+  lineHeight: 1.5
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "12px",
+  gap: "10px",
   flexWrap: "wrap",
   marginTop: "8px"
 };
 
 const saveButton = {
-  padding: "12px 22px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
-  cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
+  fontSize: "0.88rem",
+  cursor: "pointer"
 };
 
 const logoutButton = {
-  padding: "12px 22px",
-  borderRadius: "10px",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  background: "rgba(239, 68, 68, 0.15)",
-  color: "#fca5a5",
-  fontWeight: 600,
+  padding: "10px 16px",
+  borderRadius: "6px",
+  border: "1px solid #2b1f22",
+  background: "#181214",
+  color: "#f87171",
+  fontWeight: 500,
+  fontSize: "0.85rem",
   cursor: "pointer"
 };
 
 const previewCard = {
-  background: "rgba(17, 24, 39, 0.6)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "16px",
-  padding: "24px"
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "20px"
 };
 
 const previewTitle = {
-  fontSize: "1.1rem",
-  fontWeight: 700,
-  marginBottom: "12px",
-  color: "#93c5fd"
+  fontSize: "0.92rem",
+  fontWeight: 600,
+  marginBottom: "10px",
+  color: "#ffffff"
 };
 
 const previewName = {
-  fontSize: "1.4rem",
-  fontWeight: 700,
-  marginBottom: "8px",
-  color: "#f8fafc"
+  fontSize: "1.2rem",
+  fontWeight: 600,
+  marginBottom: "6px",
+  color: "#ffffff"
 };
 
 const previewDesc = {
-  color: "#cbd5e1",
-  lineHeight: 1.7
+  color: "#a1a1aa",
+  fontSize: "0.9rem",
+  lineHeight: 1.6
 };
 
 export default Dashboard;

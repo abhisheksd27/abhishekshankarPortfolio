@@ -340,55 +340,54 @@ function Experience() {
 // ================= STYLES =================
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
+  background: "#090a0f",
+  color: "#f4f4f5",
   padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1100px",
+  maxWidth: "960px",
   margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px",
+  marginBottom: "24px",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em",
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem",
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
 };
 
 const successAlert = {
   display: "flex",
   alignItems: "center",
-  gap: "10px",
-  background: "rgba(16, 185, 129, 0.15)",
-  border: "1px solid rgba(16, 185, 129, 0.35)",
-  color: "#34d399",
-  padding: "12px 18px",
-  borderRadius: "12px",
-  fontSize: "0.92rem",
-  fontWeight: 600,
+  gap: "8px",
+  background: "#13231a",
+  border: "1px solid #1c3b29",
+  color: "#4ade80",
+  padding: "10px 16px",
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500,
   marginBottom: "20px",
 };
 
 const formCard = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "18px",
-  padding: "26px",
-  marginBottom: "36px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "24px",
+  marginBottom: "32px",
 };
 
 const sectionHeader = {
@@ -397,164 +396,163 @@ const sectionHeader = {
   alignItems: "center",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "20px",
+  marginBottom: "18px",
 };
 
 const sectionTitle = {
-  fontSize: "1.25rem",
-  fontWeight: 700,
-  color: "#f8fafc",
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
 };
 
 const formGrid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-  gap: "16px",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "14px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px",
+  gap: "6px",
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8",
 };
 
 const hint = {
-  fontSize: "0.78rem",
-  color: "#94a3b8",
+  fontSize: "0.75rem",
+  color: "#71717a",
   marginTop: "2px",
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  fontSize: "0.95rem",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  fontSize: "0.9rem",
   outline: "none",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
+  background: "#181920",
+  color: "#f4f4f5",
 };
 
 const textarea = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  fontSize: "0.95rem",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  fontSize: "0.9rem",
   outline: "none",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
+  background: "#181920",
+  color: "#f4f4f5",
   fontFamily: "inherit",
-  lineHeight: 1.6,
+  lineHeight: 1.5,
   resize: "vertical",
 };
 
 const actionRow = {
-  marginTop: "22px",
+  marginTop: "18px",
   display: "flex",
-  gap: "12px",
+  gap: "10px",
 };
 
 const primaryButton = {
-  padding: "12px 24px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
-  fontSize: "0.92rem",
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)",
 };
 
 const secondaryButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#cbd5e1",
+  padding: "8px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#d4d4d8",
   fontWeight: 500,
-  fontSize: "0.85rem",
+  fontSize: "0.82rem",
   cursor: "pointer",
 };
 
 const listHeader = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  marginBottom: "20px",
+  gap: "10px",
+  marginBottom: "18px",
 };
 
 const countBadge = {
-  background: "rgba(59, 130, 246, 0.15)",
-  color: "#93c5fd",
-  border: "1px solid rgba(59, 130, 246, 0.3)",
-  padding: "2px 10px",
-  borderRadius: "999px",
-  fontSize: "0.82rem",
-  fontWeight: 700,
+  background: "#20222b",
+  color: "#d4d4d8",
+  border: "1px solid #282a35",
+  padding: "2px 8px",
+  borderRadius: "4px",
+  fontSize: "0.78rem",
+  fontWeight: 600,
 };
 
 const cardGrid = {
   display: "grid",
   gridTemplateColumns: "1fr",
-  gap: "18px",
+  gap: "14px",
 };
 
 const experienceCard = {
-  background: "rgba(17, 24, 39, 0.65)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "16px",
-  padding: "22px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "20px",
 };
 
 const experienceCardBody = {
   display: "flex",
   flexDirection: "column",
-  gap: "12px",
+  gap: "10px",
 };
 
 const cardTopRow = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  gap: "16px",
+  gap: "14px",
   flexWrap: "wrap",
 };
 
 const experienceTitle = {
-  fontSize: "1.2rem",
-  fontWeight: 700,
-  color: "#f8fafc",
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
 };
 
 const experienceCompany = {
-  fontSize: "0.95rem",
-  color: "#60a5fa",
-  fontWeight: 600,
+  fontSize: "0.9rem",
+  color: "#ffffff",
+  fontWeight: 500,
   marginTop: "2px",
 };
 
 const experienceLocation = {
-  fontSize: "0.82rem",
-  color: "#94a3b8",
+  fontSize: "0.8rem",
+  color: "#71717a",
   marginTop: "2px",
 };
 
 const durationPill = {
-  fontSize: "0.82rem",
-  fontWeight: 600,
-  color: "#93c5fd",
-  background: "rgba(59, 130, 246, 0.1)",
-  border: "1px solid rgba(59, 130, 246, 0.2)",
-  padding: "4px 12px",
-  borderRadius: "999px",
+  fontSize: "0.78rem",
+  fontFamily: "var(--font-mono)",
+  color: "#a1a1aa",
+  background: "rgba(255, 255, 255, 0.04)",
+  border: "1px solid #20222b",
+  padding: "3px 8px",
+  borderRadius: "4px",
   whiteSpace: "nowrap",
 };
 
@@ -564,16 +562,16 @@ const descBlock = {
 
 const fieldSubtitle = {
   display: "block",
-  fontSize: "0.82rem",
+  fontSize: "0.75rem",
   textTransform: "uppercase",
-  letterSpacing: "0.06em",
-  color: "#94a3b8",
+  letterSpacing: "0.05em",
+  color: "#71717a",
   marginBottom: "4px",
 };
 
 const experienceDesc = {
-  color: "#cbd5e1",
-  fontSize: "0.92rem",
+  color: "#a1a1aa",
+  fontSize: "0.9rem",
   lineHeight: 1.6,
 };
 
@@ -589,53 +587,54 @@ const techTagContainer = {
 };
 
 const techBadge = {
-  fontSize: "0.78rem",
-  fontWeight: 500,
-  color: "#93c5fd",
-  background: "rgba(59, 130, 246, 0.12)",
-  border: "1px solid rgba(59, 130, 246, 0.25)",
-  padding: "3px 10px",
-  borderRadius: "6px",
+  fontSize: "0.75rem",
+  fontFamily: "var(--font-mono)",
+  color: "#d4d4d8",
+  background: "#181920",
+  border: "1px solid #282a35",
+  padding: "3px 8px",
+  borderRadius: "4px",
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "10px",
+  gap: "8px",
   marginTop: "8px",
 };
 
 const editButton = {
-  padding: "7px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#f8fafc",
-  fontSize: "0.84rem",
-  fontWeight: 600,
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.82rem",
+  fontWeight: 500,
   cursor: "pointer",
 };
 
 const deleteButton = {
-  padding: "7px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  background: "rgba(239, 68, 68, 0.1)",
-  color: "#fca5a5",
-  fontSize: "0.84rem",
-  fontWeight: 600,
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #2b1f22",
+  background: "#181214",
+  color: "#f87171",
+  fontSize: "0.82rem",
+  fontWeight: 500,
   cursor: "pointer",
 };
 
 const emptyState = {
-  padding: "40px",
+  padding: "36px",
   textAlign: "center",
-  background: "rgba(17, 24, 39, 0.4)",
-  borderRadius: "16px",
-  border: "1px solid rgba(255, 255, 255, 0.06)",
+  background: "#121318",
+  borderRadius: "8px",
+  border: "1px dashed #20222b",
 };
 
 const emptyText = {
-  color: "#94a3b8",
+  color: "#71717a",
+  fontSize: "0.9rem",
 };
 
 export default Experience;

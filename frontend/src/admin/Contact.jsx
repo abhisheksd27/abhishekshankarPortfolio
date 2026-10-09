@@ -10,13 +10,15 @@ function Contact() {
     twitter: ""
   });
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/portfolio`);
+        const res = await axios.get(`${API_URL}/api/portfolio`);
         setContact({
           email: res.data?.contact?.email || "",
           phone: res.data?.contact?.phone || "",
@@ -30,7 +32,7 @@ function Contact() {
     };
 
     load();
-  }, []);
+  }, [API_URL]);
 
   const handleChange = (e) => {
     setContact((prev) => ({
@@ -39,16 +41,18 @@ function Contact() {
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
     try {
       if (!contact.email.trim() && !contact.phone.trim()) {
-        alert("Please add at least email or phone");
+        alert("Please provide at least an email or phone number.");
         return;
       }
 
       setLoading(true);
 
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/portfolio`,
+      const res = await axios.post(
+        `${API_URL}/api/portfolio`,
         { contact },
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -63,10 +67,11 @@ function Contact() {
         twitter: res.data?.contact?.twitter || ""
       });
 
-      alert("Contact updated successfully");
+      setMsg("Contact details updated successfully.");
+      setTimeout(() => setMsg(""), 3500);
     } catch (err) {
       console.error(err);
-      alert("Error saving contact");
+      alert("Error saving contact details.");
     } finally {
       setLoading(false);
     }
@@ -78,17 +83,19 @@ function Contact() {
         <div style={header}>
           <h1 style={title}>Contact Information</h1>
           <p style={subtitle}>
-            Manage your email, phone number, and social profile links.
+            Manage public contact details, channels, and professional social profiles.
           </p>
         </div>
+
+        {msg && <div style={successAlert}>{msg}</div>}
 
         <div style={card}>
           <div style={grid}>
             <div style={field}>
-              <label style={label}>Email</label>
+              <label style={label}>Primary Email</label>
               <input
                 name="email"
-                placeholder="you@example.com"
+                placeholder="Abhishekdshankar@gmail.com"
                 value={contact.email}
                 onChange={handleChange}
                 style={input}
@@ -96,10 +103,10 @@ function Contact() {
             </div>
 
             <div style={field}>
-              <label style={label}>Phone</label>
+              <label style={label}>Phone Number</label>
               <input
                 name="phone"
-                placeholder="+91 9876543210"
+                placeholder="+91 7338006503"
                 value={contact.phone}
                 onChange={handleChange}
                 style={input}
@@ -107,10 +114,10 @@ function Contact() {
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>GitHub</label>
+              <label style={label}>GitHub Profile URL</label>
               <input
                 name="github"
-                placeholder="https://github.com/yourusername"
+                placeholder="https://github.com/abhisheksd27"
                 value={contact.github}
                 onChange={handleChange}
                 style={input}
@@ -118,10 +125,10 @@ function Contact() {
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>LinkedIn</label>
+              <label style={label}>LinkedIn Profile URL</label>
               <input
                 name="linkedin"
-                placeholder="https://linkedin.com/in/yourprofile"
+                placeholder="https://www.linkedin.com/in/abhishekshankar27/"
                 value={contact.linkedin}
                 onChange={handleChange}
                 style={input}
@@ -129,10 +136,10 @@ function Contact() {
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>Twitter / X</label>
+              <label style={label}>X / Twitter Profile URL (Optional)</label>
               <input
                 name="twitter"
-                placeholder="https://x.com/yourhandle"
+                placeholder="https://x.com/username"
                 value={contact.twitter}
                 onChange={handleChange}
                 style={input}
@@ -141,28 +148,30 @@ function Contact() {
           </div>
 
           <div style={previewCard}>
-            <h2 style={previewTitle}>Preview</h2>
-            <p style={previewLine}>
-              <strong>Email:</strong> {contact.email || "Not added"}
-            </p>
-            <p style={previewLine}>
-              <strong>Phone:</strong> {contact.phone || "Not added"}
-            </p>
+            <h2 style={previewTitle}>Live Display Preview</h2>
+            <div style={previewLine}>
+              <span style={previewKey}>Email:</span>
+              <span style={previewVal}>{contact.email || "Not specified"}</span>
+            </div>
+            <div style={previewLine}>
+              <span style={previewKey}>Phone:</span>
+              <span style={previewVal}>{contact.phone || "Not specified"}</span>
+            </div>
 
             <div style={previewLinks}>
               {contact.github && (
                 <a href={contact.github} target="_blank" rel="noreferrer" style={link}>
-                  GitHub
+                  GitHub ↗
                 </a>
               )}
               {contact.linkedin && (
                 <a href={contact.linkedin} target="_blank" rel="noreferrer" style={link}>
-                  LinkedIn
+                  LinkedIn ↗
                 </a>
               )}
               {contact.twitter && (
                 <a href={contact.twitter} target="_blank" rel="noreferrer" style={link}>
-                  Twitter
+                  Twitter / X ↗
                 </a>
               )}
             </div>
@@ -170,7 +179,7 @@ function Contact() {
 
           <div style={buttonRow}>
             <button onClick={handleSave} style={saveButton} disabled={loading}>
-              {loading ? "Saving..." : "Save Contact"}
+              {loading ? "Saving..." : "Save Contact Info"}
             </button>
           </div>
         </div>
@@ -179,124 +188,149 @@ function Contact() {
   );
 }
 
+// ================= STYLES =================
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
-  padding: "32px 20px 80px"
+  background: "#090a0f",
+  color: "#f4f4f5",
+  padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1000px",
-  margin: "0 auto"
+  maxWidth: "960px",
+  margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
+};
+
+const successAlert = {
+  background: "#13231a",
+  border: "1px solid #1c3b29",
+  color: "#4ade80",
+  padding: "10px 16px",
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500,
+  marginBottom: "20px",
 };
 
 const card = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
   padding: "24px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const grid = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-  gap: "16px",
-  marginBottom: "20px"
+  gap: "14px",
+  marginBottom: "24px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "6px",
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1"
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8",
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
-  outline: "none"
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
+  outline: "none",
 };
 
 const previewCard = {
-  background: "rgba(17, 24, 39, 0.6)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "14px",
-  padding: "20px",
-  marginBottom: "22px"
+  background: "#181920",
+  border: "1px solid #282a35",
+  borderRadius: "6px",
+  padding: "18px",
+  marginBottom: "20px",
 };
 
 const previewTitle = {
-  fontSize: "1.1rem",
-  fontWeight: 700,
-  color: "#93c5fd",
-  marginBottom: "12px"
+  fontSize: "0.92rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "12px",
 };
 
 const previewLine = {
-  color: "#cbd5e1",
-  marginBottom: "8px",
-  lineHeight: 1.6
+  display: "flex",
+  gap: "8px",
+  fontSize: "0.85rem",
+  marginBottom: "6px",
+};
+
+const previewKey = {
+  color: "#71717a",
+  fontWeight: 500,
+  minWidth: "60px",
+};
+
+const previewVal = {
+  color: "#d4d4d8",
+  fontFamily: "var(--font-mono)",
 };
 
 const previewLinks = {
   display: "flex",
   gap: "12px",
   flexWrap: "wrap",
-  marginTop: "12px"
+  marginTop: "12px",
+  paddingTop: "10px",
+  borderTop: "1px solid #282a35",
 };
 
 const link = {
-  color: "#60a5fa",
+  color: "#93c5fd",
   textDecoration: "none",
-  fontWeight: 600,
-  fontSize: "0.9rem"
+  fontWeight: 500,
+  fontSize: "0.85rem",
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "12px",
-  flexWrap: "wrap"
+  gap: "10px",
+  flexWrap: "wrap",
 };
 
 const saveButton = {
-  padding: "12px 24px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 export default Contact;

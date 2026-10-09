@@ -16,19 +16,21 @@ function AdminSidebar() {
 }
 
 const sidebarStyle = {
-  backgroundColor: "#080c14",
-  borderRight: "1px solid rgba(255, 255, 255, 0.08)",
+  backgroundColor: "#090a0f",
+  borderRight: "1px solid #20222b",
   padding: "20px 16px",
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "4px"
 };
 
 const linkStyle = {
-  color: "#94a3b8",
+  color: "#a1a1aa",
   textDecoration: "none",
   padding: "8px 12px",
-  borderRadius: "8px"
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500
 };
 
 export default AdminSidebar;

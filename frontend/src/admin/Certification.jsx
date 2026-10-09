@@ -12,9 +12,10 @@ function Certification() {
   const [file, setFile] = useState(null);
   const [editIndex, setEditIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const token = localStorage.getItem("token");
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const load = async () => {
@@ -54,7 +55,8 @@ function Certification() {
     setEditIndex(null);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
     try {
       if (!form.name.trim() || !form.issuer.trim()) {
         alert("Please enter certificate name and issuer");
@@ -91,10 +93,11 @@ function Certification() {
 
       setCerts(res.data.certification || []);
       resetForm();
-      alert(editIndex !== null ? "Certification updated" : "Certification added");
+      setMsg(editIndex !== null ? "Certification updated successfully." : "Certification added successfully.");
+      setTimeout(() => setMsg(""), 3500);
     } catch (err) {
       console.error(err);
-      alert("Something went wrong");
+      alert("Something went wrong while saving certification.");
     } finally {
       setLoading(false);
     }
@@ -138,9 +141,11 @@ function Certification() {
         <div style={header}>
           <h1 style={title}>Certifications</h1>
           <p style={subtitle}>
-            Add, edit, and manage certificate details, links, and preview images.
+            Manage technical credentials, verified links, and credential issuers.
           </p>
         </div>
+
+        {msg && <div style={successAlert}>{msg}</div>}
 
         <div style={formCard}>
           <div style={sectionHeader}>
@@ -159,7 +164,7 @@ function Certification() {
               <label style={label}>Certificate Name</label>
               <input
                 style={input}
-                placeholder="AWS Cloud Practitioner"
+                placeholder="Google Cybersecurity Professional Certificate"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
               />
@@ -169,24 +174,24 @@ function Certification() {
               <label style={label}>Issuer</label>
               <input
                 style={input}
-                placeholder="Amazon Web Services"
+                placeholder="Google / Coursera"
                 value={form.issuer}
                 onChange={(e) => setForm({ ...form, issuer: e.target.value })}
               />
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>Certificate Link</label>
+              <label style={label}>Verification URL</label>
               <input
                 style={input}
-                placeholder="https://..."
+                placeholder="https://coursera.org/verify/..."
                 value={form.link}
                 onChange={(e) => setForm({ ...form, link: e.target.value })}
               />
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>Certificate Image</label>
+              <label style={label}>Certificate Image (Optional)</label>
               <input
                 style={fileInput}
                 type="file"
@@ -195,7 +200,7 @@ function Certification() {
               />
               {(file || form.image) && (
                 <p style={helperText}>
-                  {file ? `Selected: ${file.name}` : "Existing image will be used"}
+                  {file ? `Selected file: ${file.name}` : "Existing image configured"}
                 </p>
               )}
             </div>
@@ -213,24 +218,22 @@ function Certification() {
         </div>
 
         <div style={listHeader}>
-          <h2 style={sectionTitle}>Saved Certifications</h2>
+          <h2 style={sectionTitle}>Active Certifications</h2>
           <span style={countBadge}>{certs.length}</span>
         </div>
 
         {certs.length === 0 ? (
           <div style={emptyState}>
-            <p style={emptyText}>No certifications added yet.</p>
+            <p style={emptyText}>No certifications recorded yet.</p>
           </div>
         ) : (
           <div style={cardGrid}>
             {certs.map((cert, index) => (
               <div key={index} style={certCard}>
                 <div style={certCardBody}>
-                  <div style={certTop}>
-                    <div>
-                      <h3 style={certTitle}>{cert.name}</h3>
-                      <p style={certIssuer}>{cert.issuer}</p>
-                    </div>
+                  <div>
+                    <h3 style={certTitle}>{cert.name}</h3>
+                    <p style={certIssuer}>{cert.issuer}</p>
                   </div>
 
                   {cert.image && (
@@ -251,7 +254,7 @@ function Certification() {
                       rel="noreferrer"
                       style={link}
                     >
-                      View Certificate
+                      View Credential ↗
                     </a>
                   )}
 
@@ -273,43 +276,54 @@ function Certification() {
   );
 }
 
+// ================= STYLES =================
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
-  padding: "32px 20px 80px"
+  background: "#090a0f",
+  color: "#f4f4f5",
+  padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1100px",
-  margin: "0 auto"
+  maxWidth: "960px",
+  margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
+};
+
+const successAlert = {
+  background: "#13231a",
+  border: "1px solid #1c3b29",
+  color: "#4ade80",
+  padding: "10px 16px",
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500,
+  marginBottom: "20px",
 };
 
 const formCard = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
   padding: "24px",
   marginBottom: "32px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const sectionHeader = {
@@ -318,195 +332,199 @@ const sectionHeader = {
   alignItems: "center",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "20px"
+  marginBottom: "18px",
 };
 
 const sectionTitle = {
-  fontSize: "1.25rem",
-  fontWeight: 700,
-  color: "#f8fafc"
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
 };
 
 const formGrid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-  gap: "16px"
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "14px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "6px",
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1"
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8",
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
-  outline: "none"
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
+  outline: "none",
 };
 
 const fileInput = {
   width: "100%",
-  padding: "10px 12px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc"
+  padding: "8px 10px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#a1a1aa",
+  fontSize: "0.85rem",
 };
 
 const helperText = {
-  fontSize: "0.85rem",
-  color: "#93c5fd"
+  fontSize: "0.78rem",
+  color: "#71717a",
+  marginTop: "4px",
 };
 
 const actionRow = {
-  marginTop: "20px",
+  marginTop: "18px",
   display: "flex",
-  gap: "12px",
-  flexWrap: "wrap"
+  gap: "10px",
+  flexWrap: "wrap",
 };
 
 const primaryButton = {
-  padding: "12px 22px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const secondaryButton = {
-  padding: "10px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#cbd5e1",
+  padding: "8px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#d4d4d8",
   fontWeight: 500,
-  cursor: "pointer"
+  fontSize: "0.82rem",
+  cursor: "pointer",
 };
 
 const listHeader = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  marginBottom: "20px"
+  gap: "10px",
+  marginBottom: "18px",
 };
 
 const countBadge = {
-  background: "rgba(59, 130, 246, 0.15)",
-  color: "#93c5fd",
-  border: "1px solid rgba(59, 130, 246, 0.3)",
-  borderRadius: "999px",
-  padding: "3px 10px",
-  fontSize: "0.85rem",
-  fontWeight: 700
+  background: "#20222b",
+  color: "#d4d4d8",
+  border: "1px solid #282a35",
+  padding: "2px 8px",
+  borderRadius: "4px",
+  fontSize: "0.78rem",
+  fontWeight: 600,
 };
 
 const emptyState = {
-  background: "rgba(17, 24, 39, 0.4)",
-  border: "1px dashed rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px dashed #20222b",
+  borderRadius: "8px",
   padding: "36px",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const emptyText = {
-  color: "#94a3b8"
+  color: "#71717a",
+  fontSize: "0.9rem",
 };
 
 const cardGrid = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "18px"
+  gap: "14px",
 };
 
 const certCard = {
-  background: "rgba(17, 24, 39, 0.65)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "16px",
-  overflow: "hidden"
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "18px",
 };
 
 const certCardBody = {
-  padding: "20px"
-};
-
-const certTop = {
-  marginBottom: "12px"
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
 };
 
 const certTitle = {
-  fontSize: "1.15rem",
-  fontWeight: 700,
-  color: "#f8fafc",
-  marginBottom: "4px"
+  fontSize: "1.02rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "3px",
 };
 
 const certIssuer = {
-  color: "#93c5fd",
-  fontWeight: 600,
-  fontSize: "0.9rem"
+  color: "#a1a1aa",
+  fontWeight: 500,
+  fontSize: "0.85rem",
 };
 
 const imageWrap = {
-  marginBottom: "14px"
+  borderRadius: "6px",
+  overflow: "hidden",
+  border: "1px solid #20222b",
+  background: "#090a0f",
 };
 
 const image = {
   width: "100%",
-  height: "200px",
+  height: "160px",
   objectFit: "cover",
-  borderRadius: "12px",
+  display: "block",
   cursor: "pointer",
-  border: "1px solid rgba(255, 255, 255, 0.1)"
 };
 
 const link = {
-  display: "inline-block",
-  marginBottom: "16px",
-  color: "#60a5fa",
+  color: "#93c5fd",
   textDecoration: "none",
-  fontWeight: 600,
-  fontSize: "0.9rem"
+  fontWeight: 500,
+  fontSize: "0.85rem",
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "10px",
-  flexWrap: "wrap"
+  gap: "8px",
+  marginTop: "4px",
 };
 
 const editButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#f8fafc",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 const deleteButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  background: "rgba(239, 68, 68, 0.12)",
-  color: "#fca5a5",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #2b1f22",
+  background: "#181214",
+  color: "#f87171",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 export default Certification;

@@ -206,41 +206,40 @@ function Education() {
 
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
-  padding: "32px 20px 80px"
+  background: "#090a0f",
+  color: "#f4f4f5",
+  padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1100px",
-  margin: "0 auto"
+  maxWidth: "960px",
+  margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
 };
 
 const formCard = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
   padding: "24px",
   marginBottom: "32px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const sectionHeader = {
@@ -249,162 +248,173 @@ const sectionHeader = {
   alignItems: "center",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "20px"
+  marginBottom: "18px",
 };
 
 const sectionTitle = {
-  fontSize: "1.25rem",
-  fontWeight: 700,
-  color: "#f8fafc"
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
 };
 
 const formGrid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
-  gap: "16px"
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "14px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "6px",
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1"
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8",
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
-  outline: "none"
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
+  outline: "none",
 };
 
 const actionRow = {
-  marginTop: "20px",
+  marginTop: "18px",
   display: "flex",
-  gap: "12px",
-  flexWrap: "wrap"
+  gap: "10px",
+  flexWrap: "wrap",
 };
 
 const primaryButton = {
-  padding: "12px 22px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const secondaryButton = {
-  padding: "10px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#cbd5e1",
+  padding: "8px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#d4d4d8",
   fontWeight: 500,
-  cursor: "pointer"
+  fontSize: "0.82rem",
+  cursor: "pointer",
 };
 
 const listHeader = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  marginBottom: "20px"
+  gap: "10px",
+  marginBottom: "18px",
 };
 
 const countBadge = {
-  background: "rgba(59, 130, 246, 0.15)",
-  color: "#93c5fd",
-  border: "1px solid rgba(59, 130, 246, 0.3)",
-  borderRadius: "999px",
-  padding: "3px 10px",
-  fontSize: "0.85rem",
-  fontWeight: 700
+  background: "#20222b",
+  color: "#d4d4d8",
+  border: "1px solid #282a35",
+  padding: "2px 8px",
+  borderRadius: "4px",
+  fontSize: "0.78rem",
+  fontWeight: 600,
 };
 
 const emptyState = {
-  background: "rgba(17, 24, 39, 0.4)",
-  border: "1px dashed rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px dashed #20222b",
+  borderRadius: "8px",
   padding: "36px",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const emptyText = {
-  color: "#94a3b8"
+  color: "#71717a",
+  fontSize: "0.9rem",
 };
 
 const cardGrid = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "18px"
+  gap: "14px",
 };
 
 const educationCard = {
-  background: "rgba(17, 24, 39, 0.65)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "16px",
-  overflow: "hidden"
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "20px",
 };
 
 const educationCardBody = {
-  padding: "20px"
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
 };
 
 const educationTitle = {
-  fontSize: "1.15rem",
-  fontWeight: 700,
-  color: "#f8fafc",
-  marginBottom: "8px"
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "4px",
 };
 
 const educationCollege = {
-  color: "#60a5fa",
-  fontWeight: 600,
-  marginBottom: "6px",
-  lineHeight: 1.6
+  color: "#d4d4d8",
+  fontSize: "0.9rem",
+  lineHeight: 1.5,
 };
 
 const educationYear = {
-  color: "#94a3b8",
-  fontSize: "0.9rem",
-  marginBottom: "16px"
+  color: "#a1a1aa",
+  fontSize: "0.78rem",
+  fontFamily: "var(--font-mono)",
+  background: "rgba(255, 255, 255, 0.04)",
+  border: "1px solid #20222b",
+  padding: "3px 8px",
+  borderRadius: "4px",
+  width: "fit-content",
+  marginBottom: "8px",
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "10px",
-  flexWrap: "wrap"
+  gap: "8px",
+  flexWrap: "wrap",
 };
 
 const editButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#f8fafc",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 const deleteButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  background: "rgba(239, 68, 68, 0.12)",
-  color: "#fca5a5",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #2b1f22",
+  background: "#181214",
+  color: "#f87171",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 export default Education;

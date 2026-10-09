@@ -15,7 +15,7 @@ function Login() {
     setErrorMsg("");
 
     if (!username.trim() || !password.trim()) {
-      setErrorMsg("Please enter both username and password");
+      setErrorMsg("Please enter both username and password.");
       return;
     }
 
@@ -32,7 +32,7 @@ function Login() {
         localStorage.setItem("token", res.data.token);
         navigate("/admin/dashboard");
       } else {
-        setErrorMsg("Failed to authenticate. No token returned.");
+        setErrorMsg("Authentication failed. No token returned.");
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -46,19 +46,13 @@ function Login() {
   return (
     <div style={page}>
       <div style={card}>
-        <div style={brandBadge}>AS</div>
-        <h1 style={title}>Admin Portal</h1>
-        <p style={subtitle}>
-          Sign in to manage portfolio content, experience, and projects.
-        </p>
+        <div style={headerBlock}>
+          <h1 style={title}>Portfolio Admin</h1>
+          <p style={subtitle}>Sign in to manage portfolio content.</p>
+        </div>
 
         {errorMsg && (
           <div style={errorBanner}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
             <span>{errorMsg}</span>
           </div>
         )}
@@ -91,13 +85,13 @@ function Login() {
           </div>
 
           <button type="submit" style={button} disabled={loading}>
-            {loading ? "Authenticating..." : "Sign In to Dashboard"}
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
         <div style={footerRow}>
           <Link to="/" style={backLink}>
-            ← Back to Public Portfolio
+            ← Return to Portfolio
           </Link>
         </div>
       </div>
@@ -105,124 +99,99 @@ function Login() {
   );
 }
 
-// ================= MODERN STYLES =================
+// ================= STYLES =================
 const page = {
   minHeight: "100vh",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: "#080c14",
+  background: "#090a0f",
   padding: "24px",
-  position: "relative",
 };
 
 const card = {
   width: "100%",
-  maxWidth: "420px",
-  background: "rgba(17, 24, 39, 0.8)",
-  backdropFilter: "blur(16px)",
-  WebkitBackdropFilter: "blur(16px)",
+  maxWidth: "400px",
+  background: "#121318",
   padding: "36px 32px",
-  borderRadius: "20px",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  boxShadow: "0 20px 48px rgba(0, 0, 0, 0.4)",
+  borderRadius: "8px",
+  border: "1px solid #20222b",
 };
 
-const brandBadge = {
-  width: "44px",
-  height: "44px",
-  borderRadius: "10px",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#ffffff",
-  display: "grid",
-  placeItems: "center",
-  fontWeight: 800,
-  fontSize: "1.1rem",
-  margin: "0 auto 16px auto",
-  boxShadow: "0 8px 20px rgba(37, 99, 235, 0.35)",
+const headerBlock = {
+  marginBottom: "24px",
+  textAlign: "center",
 };
 
 const title = {
-  fontSize: "1.6rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  textAlign: "center",
-  letterSpacing: "-0.02em",
+  fontSize: "1.35rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  fontSize: "0.9rem",
-  color: "#94a3b8",
-  textAlign: "center",
-  marginBottom: "24px",
-  lineHeight: 1.5,
+  fontSize: "0.88rem",
+  color: "#a1a1aa",
 };
 
 const errorBanner = {
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  background: "rgba(239, 68, 68, 0.12)",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  color: "#fca5a5",
+  background: "#221316",
+  border: "1px solid #451a1f",
+  color: "#f87171",
   padding: "10px 14px",
-  borderRadius: "10px",
-  fontSize: "0.86rem",
+  borderRadius: "6px",
+  fontSize: "0.85rem",
   marginBottom: "18px",
-  lineHeight: 1.4,
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
   gap: "6px",
-  marginBottom: "18px",
+  marginBottom: "16px",
 };
 
 const label = {
-  fontSize: "0.85rem",
-  color: "#cbd5e1",
-  fontWeight: 600,
-  letterSpacing: "0.02em",
+  fontSize: "0.82rem",
+  color: "#d4d4d8",
+  fontWeight: 500,
 };
 
 const input = {
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  fontSize: "0.95rem",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  fontSize: "0.9rem",
   outline: "none",
-  background: "rgba(15, 23, 42, 0.7)",
-  color: "#f8fafc",
-  transition: "border-color 0.2s ease",
+  background: "#181920",
+  color: "#f4f4f5",
 };
 
 const button = {
   width: "100%",
-  padding: "13px",
-  borderRadius: "10px",
+  padding: "11px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)",
-  color: "#ffffff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
-  fontSize: "0.95rem",
+  fontSize: "0.9rem",
   cursor: "pointer",
   marginTop: "8px",
-  boxShadow: "0 6px 20px rgba(37, 99, 235, 0.35)",
-  transition: "transform 0.2s ease, opacity 0.2s ease",
+  transition: "background 0.15s ease",
 };
 
 const footerRow = {
-  marginTop: "24px",
+  marginTop: "20px",
   textAlign: "center",
 };
 
 const backLink = {
-  color: "#94a3b8",
-  fontSize: "0.85rem",
+  color: "#71717a",
+  fontSize: "0.82rem",
   textDecoration: "none",
-  transition: "color 0.2s ease",
 };
 
 export default Login;

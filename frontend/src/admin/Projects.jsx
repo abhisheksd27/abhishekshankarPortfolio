@@ -11,13 +11,15 @@ function Projects() {
   });
   const [editIndex, setEditIndex] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/portfolio`);
+        const res = await axios.get(`${API_URL}/api/portfolio`);
         setProjects(Array.isArray(res.data?.projects) ? res.data.projects : []);
       } catch (err) {
         console.error("Error loading projects:", err);
@@ -26,7 +28,7 @@ function Projects() {
     };
 
     load();
-  }, []);
+  }, [API_URL]);
 
   const resetForm = () => {
     setForm({
@@ -38,7 +40,8 @@ function Projects() {
     setEditIndex(null);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
     try {
       if (!form.title.trim() || !form.description.trim()) {
         alert("Please enter project title and description");
@@ -56,7 +59,7 @@ function Projects() {
       }
 
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/portfolio`,
+        `${API_URL}/api/portfolio`,
         { projects: updated },
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -65,11 +68,11 @@ function Projects() {
 
       setProjects(Array.isArray(res.data?.projects) ? res.data.projects : []);
       resetForm();
-
-      alert(editIndex !== null ? "Project updated successfully" : "Project added successfully");
+      setMsg(editIndex !== null ? "Project updated successfully." : "Project added successfully.");
+      setTimeout(() => setMsg(""), 3500);
     } catch (err) {
       console.error(err);
-      alert("Error saving project");
+      alert("Error saving project. Please verify you are logged in.");
     } finally {
       setLoading(false);
     }
@@ -89,7 +92,7 @@ function Projects() {
       const updated = projects.filter((_, i) => i !== index);
 
       const res = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/portfolio`,
+        `${API_URL}/api/portfolio`,
         { projects: updated },
         {
           headers: { Authorization: `Bearer ${token}` }
@@ -113,9 +116,11 @@ function Projects() {
         <div style={header}>
           <h1 style={title}>Projects</h1>
           <p style={subtitle}>
-            Add, edit, and manage your portfolio projects, descriptions, and links.
+            Manage your engineering projects, implementation architecture, and code repository links.
           </p>
         </div>
+
+        {msg && <div style={successAlert}>{msg}</div>}
 
         <div style={formCard}>
           <div style={sectionHeader}>
@@ -134,7 +139,7 @@ function Projects() {
             <div style={{ ...field, gridColumn: "1 / -1" }}>
               <label style={label}>Project Title</label>
               <input
-                placeholder="Propertease"
+                placeholder="e.g. Distributed Log Analytics Pipeline"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 style={input}
@@ -142,19 +147,20 @@ function Projects() {
             </div>
 
             <div style={{ ...field, gridColumn: "1 / -1" }}>
-              <label style={label}>Description</label>
+              <label style={label}>Description & Technologies</label>
               <textarea
-                placeholder="Briefly describe the project, what it does, and your role."
+                placeholder="Architectural overview and impact. Include technologies at the end (e.g. Skills: Python, Docker, Spark)..."
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 style={textarea}
               />
+              <span style={hint}>Tip: End with &ldquo;Skills: Tech1, Tech2&rdquo; to automatically display monospace tags on the site.</span>
             </div>
 
             <div style={field}>
-              <label style={label}>Live Link</label>
+              <label style={label}>Live Application URL (Optional)</label>
               <input
-                placeholder="https://your-live-site.com"
+                placeholder="https://your-live-deployment.com"
                 value={form.link}
                 onChange={(e) => setForm({ ...form, link: e.target.value })}
                 style={input}
@@ -162,9 +168,9 @@ function Projects() {
             </div>
 
             <div style={field}>
-              <label style={label}>GitHub Link</label>
+              <label style={label}>GitHub Repository URL</label>
               <input
-                placeholder="https://github.com/username/project"
+                placeholder="https://github.com/abhisheksd27/repository"
                 value={form.github}
                 onChange={(e) => setForm({ ...form, github: e.target.value })}
                 style={input}
@@ -184,21 +190,23 @@ function Projects() {
         </div>
 
         <div style={listHeader}>
-          <h2 style={sectionTitle}>Saved Projects</h2>
+          <h2 style={sectionTitle}>Published Projects</h2>
           <span style={countBadge}>{projects.length}</span>
         </div>
 
         {projects.length === 0 ? (
           <div style={emptyState}>
-            <p style={emptyText}>No projects added yet.</p>
+            <p style={emptyText}>No projects recorded yet.</p>
           </div>
         ) : (
           <div style={cardGrid}>
             {projects.map((project, index) => (
               <div key={index} style={projectCard}>
                 <div style={projectCardBody}>
-                  <h3 style={projectTitle}>{project.title}</h3>
-                  <p style={projectDescription}>{project.description}</p>
+                  <div>
+                    <h3 style={projectTitle}>{project.title}</h3>
+                    <p style={projectDescription}>{project.description}</p>
+                  </div>
 
                   <div style={linkRow}>
                     {project.link && (
@@ -208,7 +216,7 @@ function Projects() {
                         rel="noreferrer"
                         style={link}
                       >
-                        Live Demo
+                        Live Demo ↗
                       </a>
                     )}
 
@@ -219,7 +227,7 @@ function Projects() {
                         rel="noreferrer"
                         style={link}
                       >
-                        GitHub
+                        GitHub ↗
                       </a>
                     )}
                   </div>
@@ -242,43 +250,54 @@ function Projects() {
   );
 }
 
+// ================= STYLES =================
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
-  padding: "32px 20px 80px"
+  background: "#090a0f",
+  color: "#f4f4f5",
+  padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1100px",
-  margin: "0 auto"
+  maxWidth: "960px",
+  margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
+};
+
+const successAlert = {
+  background: "#13231a",
+  border: "1px solid #1c3b29",
+  color: "#4ade80",
+  padding: "10px 16px",
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500,
+  marginBottom: "20px",
 };
 
 const formCard = {
-  background: "rgba(17, 24, 39, 0.75)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
   padding: "24px",
   marginBottom: "32px",
-  boxShadow: "0 12px 32px rgba(0, 0, 0, 0.3)"
 };
 
 const sectionHeader = {
@@ -287,185 +306,196 @@ const sectionHeader = {
   alignItems: "center",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "20px"
+  marginBottom: "18px",
 };
 
 const sectionTitle = {
-  fontSize: "1.25rem",
-  fontWeight: 700,
-  color: "#f8fafc"
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
 };
 
 const formGrid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-  gap: "16px"
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: "14px",
 };
 
 const field = {
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "6px",
 };
 
 const label = {
-  fontSize: "0.88rem",
-  fontWeight: 600,
-  color: "#cbd5e1"
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  color: "#d4d4d8",
+};
+
+const hint = {
+  fontSize: "0.75rem",
+  color: "#71717a",
+  marginTop: "2px",
 };
 
 const input = {
   width: "100%",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
-  outline: "none"
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
+  outline: "none",
 };
 
 const textarea = {
   width: "100%",
-  minHeight: "120px",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
+  minHeight: "110px",
+  padding: "10px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.9rem",
   outline: "none",
   resize: "vertical",
   fontFamily: "inherit",
-  lineHeight: 1.6
+  lineHeight: 1.5,
 };
 
 const actionRow = {
-  marginTop: "20px",
+  marginTop: "18px",
   display: "flex",
-  gap: "12px",
-  flexWrap: "wrap"
+  gap: "10px",
+  flexWrap: "wrap",
 };
 
 const primaryButton = {
-  padding: "12px 22px",
-  borderRadius: "10px",
+  padding: "10px 20px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
+  background: "#ffffff",
+  color: "#090a0f",
   fontWeight: 600,
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const secondaryButton = {
-  padding: "10px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#cbd5e1",
+  padding: "8px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#d4d4d8",
   fontWeight: 500,
-  cursor: "pointer"
+  fontSize: "0.82rem",
+  cursor: "pointer",
 };
 
 const listHeader = {
   display: "flex",
   alignItems: "center",
-  gap: "12px",
-  marginBottom: "20px"
+  gap: "10px",
+  marginBottom: "18px",
 };
 
 const countBadge = {
-  background: "rgba(59, 130, 246, 0.15)",
-  color: "#93c5fd",
-  border: "1px solid rgba(59, 130, 246, 0.3)",
-  borderRadius: "999px",
-  padding: "3px 10px",
-  fontSize: "0.85rem",
-  fontWeight: 700
+  background: "#20222b",
+  color: "#d4d4d8",
+  border: "1px solid #282a35",
+  padding: "2px 8px",
+  borderRadius: "4px",
+  fontSize: "0.78rem",
+  fontWeight: 600,
 };
 
 const emptyState = {
-  background: "rgba(17, 24, 39, 0.4)",
-  border: "1px dashed rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
+  background: "#121318",
+  border: "1px dashed #20222b",
+  borderRadius: "8px",
   padding: "36px",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const emptyText = {
-  color: "#94a3b8"
+  color: "#71717a",
+  fontSize: "0.9rem",
 };
 
 const cardGrid = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-  gap: "18px"
+  gridTemplateColumns: "1fr",
+  gap: "14px",
 };
 
 const projectCard = {
-  background: "rgba(17, 24, 39, 0.65)",
-  border: "1px solid rgba(255, 255, 255, 0.08)",
-  borderRadius: "16px",
-  overflow: "hidden"
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "20px",
 };
 
 const projectCardBody = {
-  padding: "20px"
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
 };
 
 const projectTitle = {
-  fontSize: "1.15rem",
-  fontWeight: 700,
-  color: "#f8fafc",
-  marginBottom: "10px"
+  fontSize: "1.05rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "4px",
 };
 
 const projectDescription = {
-  color: "#cbd5e1",
-  lineHeight: 1.65,
-  marginBottom: "14px",
-  fontSize: "0.92rem"
+  color: "#a1a1aa",
+  lineHeight: 1.6,
+  fontSize: "0.88rem",
+  whiteSpace: "pre-line",
 };
 
 const linkRow = {
   display: "flex",
-  gap: "12px",
+  gap: "14px",
   flexWrap: "wrap",
-  marginBottom: "16px"
 };
 
 const link = {
-  color: "#60a5fa",
+  color: "#93c5fd",
   textDecoration: "none",
-  fontWeight: 600,
-  fontSize: "0.88rem"
+  fontWeight: 500,
+  fontSize: "0.85rem",
 };
 
 const buttonRow = {
   display: "flex",
-  gap: "10px",
-  flexWrap: "wrap"
+  gap: "8px",
+  marginTop: "4px",
 };
 
 const editButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(255, 255, 255, 0.15)",
-  background: "rgba(255, 255, 255, 0.05)",
-  color: "#f8fafc",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 const deleteButton = {
-  padding: "8px 16px",
-  borderRadius: "8px",
-  border: "1px solid rgba(239, 68, 68, 0.3)",
-  background: "rgba(239, 68, 68, 0.12)",
-  color: "#fca5a5",
-  fontWeight: 600,
-  cursor: "pointer"
+  padding: "6px 14px",
+  borderRadius: "6px",
+  border: "1px solid #2b1f22",
+  background: "#181214",
+  color: "#f87171",
+  fontSize: "0.82rem",
+  fontWeight: 500,
+  cursor: "pointer",
 };
 
 export default Projects;

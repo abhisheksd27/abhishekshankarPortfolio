@@ -2,36 +2,37 @@ import { useEffect, useState } from "react";
 import api from "../utils/api";
 
 const defaultSkills = {
+  dataEngineering: [],
+  cyberSecurity: [],
   programmingLanguages: [],
   fullStack: [],
   databases: [],
-  dataEngineering: [],
-  cyberSecurity: [],
+  applications: [],
   machineLearning: [],
-  dsa: [],
-  applications: []
+  dsa: []
 };
 
 const defaultInputs = {
+  dataEngineering: "",
+  cyberSecurity: "",
   programmingLanguages: "",
   fullStack: "",
   databases: "",
-  dataEngineering: "",
-  cyberSecurity: "",
+  applications: "",
   machineLearning: "",
-  dsa: "",
-  applications: ""
+  dsa: ""
 };
 
 function Skills() {
   const [skills, setSkills] = useState(defaultSkills);
   const [inputs, setInputs] = useState(defaultInputs);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await api.get("api/portfolio");
+        const res = await api.get("/api/portfolio");
         const incoming = res.data?.skills;
 
         setSkills({
@@ -77,7 +78,15 @@ function Skills() {
     }));
   };
 
-  const handleSave = async () => {
+  const handleKeyDown = (e, category) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addSkill(category);
+    }
+  };
+
+  const handleSave = async (e) => {
+    if (e) e.preventDefault();
     try {
       setLoading(true);
 
@@ -86,17 +95,18 @@ function Skills() {
         ...skills
       };
 
-      await api.put("api/portfolio/skills", { skills: payload });
-      alert("Skills updated successfully");
+      await api.post("/api/portfolio", { skills: payload });
+      setMsg("Skills matrix saved successfully.");
+      setTimeout(() => setMsg(""), 3500);
     } catch (err) {
       console.error("Failed to save skills:", err);
-      alert("Failed to update skills");
+      alert("Failed to update skills. Please verify your admin session.");
     } finally {
       setLoading(false);
     }
   };
 
-  const renderCategory = (label, key) => {
+  const renderCategory = (label, key, subtitleText) => {
     const items = Array.isArray(skills[key]) ? skills[key] : [];
 
     return (
@@ -104,11 +114,9 @@ function Skills() {
         <div style={sectionHeader}>
           <div>
             <h3 style={sectionTitle}>{label}</h3>
-            <p style={sectionSubtitle}>
-              Add and organize items under {label.toLowerCase()}.
-            </p>
+            {subtitleText && <p style={sectionSubtitle}>{subtitleText}</p>}
           </div>
-          <span style={countBadge}>{items.length}</span>
+          <span style={countBadge}>{items.length} items</span>
         </div>
 
         <div style={inputRow}>
@@ -121,7 +129,8 @@ function Skills() {
                 [key]: e.target.value
               }))
             }
-            placeholder={`Add ${label}`}
+            onKeyDown={(e) => handleKeyDown(e, key)}
+            placeholder={`Add ${label} (press Enter)`}
           />
           <button style={buttonStyle} onClick={() => addSkill(key)}>
             Add
@@ -136,13 +145,14 @@ function Skills() {
                 <button
                   style={tagRemoveStyle}
                   onClick={() => removeSkill(key, index)}
+                  title="Remove skill"
                 >
                   ×
                 </button>
               </div>
             ))
           ) : (
-            <p style={emptyText}>No items added yet</p>
+            <p style={emptyText}>No skills added under this category yet.</p>
           )}
         </div>
       </div>
@@ -153,24 +163,72 @@ function Skills() {
     <div style={page}>
       <div style={wrapper}>
         <div style={header}>
-          <h1 style={title}>Skills Management</h1>
-          <p style={subtitle}>
-            Organize your skills by category so they display clearly in your portfolio.
-          </p>
+          <div style={headerTop}>
+            <div>
+              <h1 style={title}>Technical Competencies</h1>
+              <p style={subtitle}>
+                Manage categorized technical capabilities rendered in the public portfolio matrix.
+              </p>
+            </div>
+            <button style={saveButton} onClick={handleSave} disabled={loading}>
+              {loading ? "Saving..." : "Save Matrix"}
+            </button>
+          </div>
         </div>
 
-        {renderCategory("Programming Languages", "programmingLanguages")}
-        {renderCategory("Full Stack", "fullStack")}
-        {renderCategory("Databases", "databases")}
-        {renderCategory("Data Engineering", "dataEngineering")}
-        {renderCategory("Cyber Security", "cyberSecurity")}
-        {renderCategory("Machine Learning", "machineLearning")}
-        {renderCategory("DSA", "dsa")}
-        {renderCategory("Applications", "applications")}
+        {msg && <div style={successAlert}>{msg}</div>}
+
+        {renderCategory(
+          "Data Engineering & Cloud",
+          "dataEngineering",
+          "Distributed systems, ETL, orchestration, cloud pipelines"
+        )}
+
+        {renderCategory(
+          "Cybersecurity & Defense",
+          "cyberSecurity",
+          "SIEM, incident response, network auditing, linux hardening"
+        )}
+
+        {renderCategory(
+          "Programming Languages",
+          "programmingLanguages",
+          "Core software engineering languages and scripting"
+        )}
+
+        {renderCategory(
+          "Full Stack Architecture",
+          "fullStack",
+          "Frontend frameworks, backend services, API interfaces"
+        )}
+
+        {renderCategory(
+          "Databases & Storage",
+          "databases",
+          "Relational, analytical data warehouses, and NoSQL engines"
+        )}
+
+        {renderCategory(
+          "Developer Tools & Infrastructure",
+          "applications",
+          "Containers, CI/CD, version control, and productivity tools"
+        )}
+
+        {renderCategory(
+          "Machine Learning",
+          "machineLearning",
+          "Modeling, predictive algorithms, and statistical analysis"
+        )}
+
+        {renderCategory(
+          "DSA & Problem Solving",
+          "dsa",
+          "Data structures, algorithms, and computational patterns"
+        )}
 
         <div style={saveRow}>
           <button style={saveButton} onClick={handleSave} disabled={loading}>
-            {loading ? "Saving..." : "Save Skills"}
+            {loading ? "Saving Matrix..." : "Save Technical Matrix"}
           </button>
         </div>
       </div>
@@ -178,43 +236,62 @@ function Skills() {
   );
 }
 
+// ================= STYLES =================
 const page = {
   minHeight: "100vh",
-  background: "#080c14",
-  color: "#f8fafc",
-  padding: "32px 20px 80px"
+  background: "#090a0f",
+  color: "#f4f4f5",
+  padding: "32px 20px 80px",
 };
 
 const wrapper = {
-  maxWidth: "1100px",
-  margin: "0 auto"
+  maxWidth: "960px",
+  margin: "0 auto",
 };
 
 const header = {
-  marginBottom: "28px"
+  marginBottom: "24px",
+};
+
+const headerTop = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-end",
+  gap: "16px",
+  flexWrap: "wrap",
 };
 
 const title = {
-  fontSize: "2rem",
-  fontWeight: 800,
-  color: "#f8fafc",
-  marginBottom: "8px",
-  letterSpacing: "-0.02em"
+  fontSize: "1.5rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "6px",
+  letterSpacing: "-0.01em",
 };
 
 const subtitle = {
-  color: "#94a3b8",
-  lineHeight: 1.6,
-  fontSize: "0.95rem"
+  color: "#a1a1aa",
+  lineHeight: 1.5,
+  fontSize: "0.88rem",
+};
+
+const successAlert = {
+  background: "#13231a",
+  border: "1px solid #1c3b29",
+  color: "#4ade80",
+  padding: "10px 16px",
+  borderRadius: "6px",
+  fontSize: "0.88rem",
+  fontWeight: 500,
+  marginBottom: "20px",
 };
 
 const sectionCard = {
-  background: "rgba(17, 24, 39, 0.75)",
-  padding: "24px",
-  borderRadius: "16px",
-  marginBottom: "20px",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  boxShadow: "0 10px 28px rgba(0, 0, 0, 0.25)"
+  background: "#121318",
+  border: "1px solid #20222b",
+  borderRadius: "8px",
+  padding: "20px",
+  marginBottom: "16px",
 };
 
 const sectionHeader = {
@@ -223,109 +300,112 @@ const sectionHeader = {
   alignItems: "flex-start",
   gap: "12px",
   flexWrap: "wrap",
-  marginBottom: "16px"
+  marginBottom: "14px",
 };
 
 const sectionTitle = {
-  fontSize: "1.2rem",
-  fontWeight: 700,
-  color: "#f8fafc",
-  marginBottom: "4px"
+  fontSize: "1.02rem",
+  fontWeight: 600,
+  color: "#ffffff",
+  marginBottom: "2px",
 };
 
 const sectionSubtitle = {
-  color: "#94a3b8",
-  fontSize: "0.88rem",
-  lineHeight: 1.5
+  color: "#71717a",
+  fontSize: "0.8rem",
 };
 
 const countBadge = {
-  background: "rgba(59, 130, 246, 0.15)",
-  color: "#93c5fd",
-  border: "1px solid rgba(59, 130, 246, 0.3)",
-  borderRadius: "999px",
-  padding: "3px 10px",
-  fontSize: "0.85rem",
-  fontWeight: 700
+  background: "#20222b",
+  color: "#a1a1aa",
+  border: "1px solid #282a35",
+  fontFamily: "var(--font-mono)",
+  borderRadius: "4px",
+  padding: "2px 8px",
+  fontSize: "0.75rem",
+  fontWeight: 500,
 };
 
 const inputRow = {
   display: "flex",
-  gap: "10px",
-  marginBottom: "16px",
-  flexWrap: "wrap"
+  gap: "8px",
+  marginBottom: "14px",
+  flexWrap: "wrap",
 };
 
 const inputStyle = {
   flex: 1,
-  minWidth: "240px",
-  padding: "12px 14px",
-  borderRadius: "10px",
-  border: "1px solid rgba(255, 255, 255, 0.12)",
-  background: "rgba(15, 23, 42, 0.8)",
-  color: "#f8fafc",
-  fontSize: "0.95rem",
-  outline: "none"
+  minWidth: "220px",
+  padding: "9px 12px",
+  borderRadius: "6px",
+  border: "1px solid #282a35",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontSize: "0.88rem",
+  outline: "none",
 };
 
 const buttonStyle = {
-  padding: "12px 20px",
-  border: "none",
-  borderRadius: "10px",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
-  fontWeight: 600,
+  padding: "9px 16px",
+  border: "1px solid #282a35",
+  borderRadius: "6px",
+  background: "#181920",
+  color: "#f4f4f5",
+  fontWeight: 500,
+  fontSize: "0.85rem",
   cursor: "pointer",
-  boxShadow: "0 4px 14px rgba(37, 99, 235, 0.35)"
 };
 
 const tagWrap = {
   display: "flex",
   flexWrap: "wrap",
-  gap: "10px"
+  gap: "6px",
 };
 
 const tagStyle = {
-  display: "flex",
+  display: "inline-flex",
   alignItems: "center",
-  gap: "8px",
-  padding: "7px 14px",
-  borderRadius: "999px",
-  background: "rgba(59, 130, 246, 0.12)",
-  border: "1px solid rgba(59, 130, 246, 0.25)",
-  color: "#93c5fd",
-  fontSize: "0.88rem",
-  fontWeight: 500
+  gap: "6px",
+  padding: "4px 10px",
+  borderRadius: "4px",
+  background: "#181920",
+  border: "1px solid #282a35",
+  color: "#d4d4d8",
+  fontSize: "0.8rem",
+  fontFamily: "var(--font-mono)",
+  fontWeight: 400,
 };
 
 const tagRemoveStyle = {
   border: "none",
   background: "transparent",
   cursor: "pointer",
-  fontSize: "16px",
-  color: "#fca5a5",
-  lineHeight: 1
+  fontSize: "14px",
+  color: "#71717a",
+  padding: 0,
+  lineHeight: 1,
+  display: "flex",
+  alignItems: "center",
 };
 
 const emptyText = {
-  color: "#64748b",
-  fontSize: "0.9rem"
+  color: "#71717a",
+  fontSize: "0.82rem",
 };
 
 const saveRow = {
-  marginTop: "28px"
+  marginTop: "24px",
 };
 
 const saveButton = {
-  padding: "13px 28px",
-  borderRadius: "10px",
+  padding: "10px 22px",
+  borderRadius: "6px",
   border: "none",
-  background: "linear-gradient(135deg, #2563eb, #4f46e5)",
-  color: "#fff",
-  fontWeight: 700,
-  fontSize: "0.95rem",
+  background: "#ffffff",
+  color: "#090a0f",
+  fontWeight: 600,
+  fontSize: "0.88rem",
   cursor: "pointer",
-  boxShadow: "0 4px 16px rgba(37, 99, 235, 0.4)"
 };
 
 export default Skills;

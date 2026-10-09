@@ -8,24 +8,17 @@ function Navbar() {
     { label: "Experience", href: "#experience" },
     { label: "Projects", href: "#projects" },
     { label: "Skills", href: "#skills" },
-    { label: "Certification", href: "#certification" },
+    { label: "Certifications", href: "#certifications" },
     { label: "Education", href: "#education" },
     { label: "Contact", href: "#contact" },
   ];
-
-  const handleLinkClick = () => {
-    setOpen(false);
-  };
 
   return (
     <header className="site-nav">
       <div className="nav-container">
         <a href="#about" className="nav-brand">
-          <div className="brand-badge">AS</div>
-          <div className="brand-info">
-            <span className="brand-name">Abhishek Shankar</span>
-            <span className="brand-role">Associate Software Engineer @ Accenture</span>
-          </div>
+          <span className="brand-dot" aria-hidden="true" />
+          <span className="brand-name">Abhishek Shankar</span>
         </a>
 
         {/* Mobile Toggle */}
@@ -35,41 +28,35 @@ function Navbar() {
           aria-label="Toggle navigation menu"
           aria-expanded={open}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             {open ? (
               <>
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </>
             ) : (
               <>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
+                <line x1="4" y1="8" x2="20" y2="8" />
+                <line x1="4" y1="16" x2="20" y2="16" />
               </>
             )}
           </svg>
         </button>
 
-        {/* Navigation items */}
         <nav className={`nav-links ${open ? "open" : ""}`}>
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className="nav-link"
-              onClick={handleLinkClick}
+              onClick={() => setOpen(false)}
             >
               {link.label}
             </a>
           ))}
 
-          <a href="#contact" className="nav-cta-btn" onClick={handleLinkClick}>
-            Connect
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
+          <a href="#contact" className="nav-cta-btn" onClick={() => setOpen(false)}>
+            Contact
           </a>
         </nav>
       </div>
