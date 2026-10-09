@@ -20,28 +20,68 @@ const DEFAULT_PORTFOLIO_DATA = {
       duration: "Sep 2024 – Present",
       location: "Bengaluru, India",
       highlight: "Current Role",
-      desc: "Architecting and managing enterprise data pipelines, transforming massive datasets, and orchestrating ETL/ELT workflows using modern big data technologies.",
+      description: "Working as a Data Engineer building modern data workflows to process, transform, and analyze large enterprise datasets. Developing resilient ETL/ELT pipelines, optimizing queries, and automating data orchestration across cloud environments.",
+      technologies: [
+        "Apache Spark",
+        "Apache Airflow",
+        "Amazon Redshift",
+        "AWS (S3, EKS)",
+        "Python",
+        "SQL",
+        "Docker",
+        "Linux & Bash",
+        "Jenkins CI/CD",
+        "DBeaver"
+      ],
     },
     {
       role: "Web Development Freelancer",
       company: "Freelance",
       duration: "Jan 2024 – Sep 2024",
+      location: "Remote",
       highlight: "Independent",
-      desc: "Delivered performant full-stack web applications and modern client portals with responsive architectures and secure authentication.",
+      description: "Delivered performant full-stack web applications and custom client portals with responsive architectures, secure JWT/OAuth authentication, and database optimizations.",
+      technologies: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS",
+        "REST APIs",
+        "Git & GitHub"
+      ],
     },
     {
       role: "Machine Learning Intern",
       company: "Varcons Inc.",
       duration: "Feb 2024 – Mar 2024",
+      location: "Bengaluru, India",
       highlight: "Internship",
-      desc: "Developed and tuned predictive machine learning models, performed data preprocessing, feature engineering, and model evaluation.",
+      description: "Built and evaluated predictive machine learning models, performed data preprocessing, feature engineering, and model evaluation using regression and ensemble methods.",
+      technologies: [
+        "Python",
+        "Scikit-Learn",
+        "Pandas",
+        "NumPy",
+        "Machine Learning",
+        "Jupyter Notebooks"
+      ],
     },
     {
       role: "Full-stack Intern",
       company: "Webstack Academy - WSA",
       duration: "Jan 2024 – Feb 2024",
+      location: "Bengaluru, India",
       highlight: "Internship",
-      desc: "Engineered scalable REST APIs, state management pipelines, and robust database models using the MERN stack.",
+      description: "Engineered scalable REST APIs, state management pipelines, and robust database models using the MERN stack with modern component architecture.",
+      technologies: [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Redux Toolkit",
+        "Bootstrap / CSS"
+      ],
     },
   ],
   education: [
@@ -379,11 +419,43 @@ function Portfolio() {
                     <div className="timeline-card-header">
                       <div>
                         <h3 className="timeline-role">{item.role}</h3>
-                        <p className="timeline-company">{item.company}</p>
+                        <div className="timeline-meta-row">
+                          <span className="timeline-company">{item.company}</span>
+                          {item.location && (
+                            <span className="timeline-location">
+                              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                              </svg>
+                              {item.location}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <span className="timeline-period">{item.duration}</span>
                     </div>
-                    {item.desc && <p className="timeline-desc">{item.desc}</p>}
+
+                    <div className="timeline-body">
+                      {(item.description || item.desc) && (
+                        <div>
+                          <span className="timeline-block-title">What I Did & Responsibilities</span>
+                          <p className="timeline-desc">{item.description || item.desc}</p>
+                        </div>
+                      )}
+
+                      {getTechList(item.technologies).length > 0 && (
+                        <div>
+                          <span className="timeline-block-title">Technologies Worked On</span>
+                          <div className="timeline-tech-stack">
+                            {getTechList(item.technologies).map((tech, i) => (
+                              <span key={i} className="timeline-tech-pill">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -802,6 +874,14 @@ function parseProjectSkills(desc = "") {
     : [];
 
   return { narrative, tags };
+}
+
+function getTechList(tech) {
+  if (Array.isArray(tech)) return tech.filter(Boolean);
+  if (typeof tech === "string" && tech.trim()) {
+    return tech.split(",").map((t) => t.trim()).filter(Boolean);
+  }
+  return [];
 }
 
 export default Portfolio;
