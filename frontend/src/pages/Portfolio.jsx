@@ -2,231 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../utils/api";
 import Navbar from "../components/Navbar";
 
-// Authoritative fallback dataset ensuring immediate 0ms initial load
-const DEFAULT_PORTFOLIO_DATA = {
-  home: {
-    name: "Abhishek Shankar",
-    role: "Associate Software Engineer at Accenture",
-    headline: "Data Engineer building resilient data pipelines and secure systems.",
-  },
-  about: {
-    desc: "I am an Associate Software Engineer at Accenture working as a Data Engineer based in Bengaluru, India. I specialize in processing, transforming, and analyzing large-scale datasets, building robust ETL/ELT pipelines, and architecting cloud workflows. Alongside enterprise data engineering, I actively study cybersecurity threat analysis and secure system engineering.",
-  },
-  experience: [
-    {
-      role: "Associate Software Engineer",
-      company: "Accenture",
-      duration: "Sep 2024 – Present",
-      location: "Bengaluru, India",
-      description: "Working as a Data Engineer developing modern data workflows to process, transform, and analyze large enterprise datasets. Engineering resilient ETL/ELT pipelines, optimizing queries, and automating data orchestration across cloud environments.",
-      technologies: [
-        "Apache Spark",
-        "Apache Airflow",
-        "Amazon Redshift",
-        "AWS (S3, EKS)",
-        "Python",
-        "SQL",
-        "Docker",
-        "Linux & Bash",
-        "Jenkins CI/CD",
-        "DBeaver"
-      ],
-    },
-    {
-      role: "Web Development Freelancer",
-      company: "Freelance",
-      duration: "Jan 2024 – Sep 2024",
-      location: "Remote",
-      description: "Delivered performant full-stack web applications and custom client portals with responsive architectures, secure JWT/OAuth authentication, and database optimizations.",
-      technologies: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Tailwind CSS",
-        "REST APIs",
-        "Git & GitHub"
-      ],
-    },
-    {
-      role: "Machine Learning Intern",
-      company: "Varcons Inc.",
-      duration: "Feb 2024 – Mar 2024",
-      location: "Bengaluru, India",
-      description: "Built and evaluated predictive machine learning models, performed data preprocessing, feature engineering, and model evaluation using regression and ensemble methods.",
-      technologies: [
-        "Python",
-        "Scikit-Learn",
-        "Pandas",
-        "NumPy",
-        "Machine Learning",
-        "Jupyter Notebooks"
-      ],
-    },
-    {
-      role: "Full-stack Intern",
-      company: "Webstack Academy - WSA",
-      duration: "Jan 2024 – Feb 2024",
-      location: "Bengaluru, India",
-      description: "Engineered scalable REST APIs, state management pipelines, and robust database models using the MERN stack with modern component architecture.",
-      technologies: [
-        "React.js",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Redux Toolkit",
-        "Bootstrap / CSS"
-      ],
-    },
-  ],
-  education: [
-    {
-      degree: "Bachelor of Engineering (Information Science and Engineering)",
-      college: "CMR Institute of Technology, Bengaluru",
-      year: "2020 – 2024",
-    },
-    {
-      degree: "Pre - University (PCMB)",
-      college: "R N Shetty PU College Kundapura",
-      year: "2018 – 2020",
-    },
-  ],
-  certification: [
-    {
-      name: "Google Cybersecurity Specialization",
-      issuer: "Google via Coursera",
-      link: "https://coursera.org/share/9685d5eda28b8a2632145987c9675a4b",
-      skills: "Threat Intelligence, Network Defense, SIEM, Python, Linux",
-    },
-    {
-      name: "Automate Cybersecurity Tasks with Python",
-      issuer: "Google via Coursera",
-      link: "https://www.coursera.org/account/accomplishments/verify/WOE75EBSP6JU",
-      skills: "Python Scripting, Log Parsing, Security Automation",
-    },
-    {
-      name: "Sound the Alarm: Detection and Response",
-      issuer: "Google via Coursera",
-      link: "https://www.coursera.org/account/accomplishments/verify/Y8PEGJKW9H5Z",
-      skills: "Incident Response, Packet Analysis, IDS/IPS, SIEM",
-    },
-    {
-      name: "Assets, Threats, and Vulnerabilities",
-      issuer: "Google via Coursera",
-      link: "https://www.coursera.org/account/accomplishments/verify/7308ZOCM7TNC",
-      skills: "Risk Assessment, Vulnerability Auditing, Cryptography",
-    },
-    {
-      name: "Tools of the Trade: Linux and SQL",
-      issuer: "Google via Coursera",
-      link: "https://www.coursera.org/account/accomplishments/verify/PMJAZT6LP6AQ",
-      skills: "Bash, CLI Navigation, Relational Databases, SQL Auditing",
-    },
-  ],
-  projects: [
-    {
-      title: "Authentication App using React",
-      description: "A full-stack authentication system built using React, Node.js, Express, and MongoDB with JWT-based authentication. Supports user signup/login and Google Sign-In with protected routes, designed as a reusable template for future projects.\nSkills: React.js, Node.js, Express.js, MongoDB, JWT, Redux Toolkit, Tailwind CSS, JavaScript",
-      link: "https://authentication-app-gczq.onrender.com/",
-      github: "https://github.com/abhisheksd27/Authentication-MERN-project",
-    },
-    {
-      title: "Chatbot using OpenAI API",
-      description: "Developed a web-based chatbot using OpenAI API to deliver dynamic and intelligent responses. Implemented secure authentication and a database system to store user history for personalized experiences.\nSkills: JavaScript, Tailwind CSS, OpenAI API, Django, HTML5",
-      link: "https://github.com/abhisheksd27/chatgpt-open-api-project",
-      github: "https://github.com/abhisheksd27/chatgpt-open-api-project",
-    },
-    {
-      title: "MERN Stack Blog Application",
-      description: "Built a feature-rich blog platform with authentication using Google OAuth, state management with Redux, and real-time updates via Firebase. Includes admin panel, search functionality, and dark/light mode.\nSkills: MERN Stack, React.js, Node.js, Express.js, MongoDB, Firebase, Redux, Tailwind CSS, OAuth",
-      link: "https://abhishekshankar.onrender.com/",
-      github: "https://github.com/abhisheksd27/DevZone",
-    },
-    {
-      title: "Road Accident Severity Prediction System",
-      description: "Developed an ML-based system to predict accident severity using real-world accident data. Implemented data preprocessing, feature engineering, and ensemble ML models with a responsive web interface for real-time inference.\nSkills: Python, Machine Learning, Flask, Pandas, NumPy, Scikit-learn, HTML, CSS, JavaScript",
-      link: "https://github.com/abhisheksd27/Road-Accident-Prediction-model",
-      github: "https://github.com/abhisheksd27/Road-Accident-Prediction-model",
-    },
-    {
-      title: "Route Planning & Location Management System",
-      description: "Created a Django-based web application integrated with Google Maps API for route planning and location management with secure authentication and multi-waypoint routing features.\nSkills: Django, Google Maps API, JavaScript, HTML5, CSS, Tailwind CSS",
-      link: "http://github.com/abhisheksd27/django-google-map-api-project",
-      github: "http://github.com/abhisheksd27/django-google-map-api-project",
-    },
-  ],
-  skills: {
-    dataEngineering: [
-      "Apache Spark",
-      "Apache Airflow",
-      "Amazon Redshift",
-      "ETL / ELT Pipelines",
-      "SQL",
-      "Python",
-      "AWS (EKS, S3, IAM)",
-      "Docker",
-      "Linux & Bash",
-      "Jenkins CI/CD",
-      "IWS",
-      "DBeaver",
-    ],
-    cyberSecurity: [
-      "SIEM Platforms",
-      "Incident Response",
-      "Threat Management",
-      "Network Security",
-      "Security Controls",
-      "Vulnerability & Compliance",
-      "Risk Analysis",
-      "Information Assurance",
-      "Data Ethics",
-      "Linux Hardening",
-    ],
-    programmingLanguages: [
-      "Python",
-      "JavaScript",
-      "SQL",
-      "C++",
-      "C",
-      "Bash Scripting",
-    ],
-    fullStack: [
-      "React.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Django",
-      "Flask",
-      "Redux Toolkit",
-      "JWT & OAuth",
-      "RESTful APIs",
-      "Tailwind CSS",
-    ],
-    databases: [
-      "Amazon Redshift",
-      "MongoDB",
-      "MySQL",
-      "Firebase",
-    ],
-    applications: [
-      "AWS",
-      "Airflow",
-      "Docker",
-      "Kubernetes / EKS",
-      "Git & GitHub",
-      "DBeaver",
-      "Linux CLI",
-      "Postman",
-    ],
-  },
-  contact: {
-    email: "Abhishekdshankar@gmail.com",
-    phone: "7338006503",
-    github: "https://github.com/abhisheksd27",
-    linkedin: "https://www.linkedin.com/in/abhishekshankar27/",
-    twitter: "",
-  },
-};
+import { DEFAULT_PORTFOLIO_DATA, mergePortfolioData } from "../data/portfolio";
+import Activity from "../components/Activity";
 
 function Portfolio() {
   const [data, setData] = useState(DEFAULT_PORTFOLIO_DATA);
@@ -238,28 +15,7 @@ function Portfolio() {
       try {
         const res = await api.get("/api/portfolio");
         if (res.data && typeof res.data === "object") {
-          setData((prev) => ({
-            ...prev,
-            ...res.data,
-            home: { ...prev.home, ...(res.data.home || {}) },
-            about: { ...prev.about, ...(res.data.about || {}) },
-            contact: { ...prev.contact, ...(res.data.contact || {}) },
-            experience: Array.isArray(res.data.experience) && res.data.experience.length > 0
-              ? res.data.experience
-              : prev.experience,
-            education: Array.isArray(res.data.education) && res.data.education.length > 0
-              ? res.data.education
-              : prev.education,
-            certification: Array.isArray(res.data.certification) && res.data.certification.length > 0
-              ? res.data.certification
-              : prev.certification,
-            projects: Array.isArray(res.data.projects) && res.data.projects.length > 0
-              ? res.data.projects
-              : prev.projects,
-            skills: res.data.skills && Object.keys(res.data.skills).length > 0
-              ? { ...prev.skills, ...res.data.skills }
-              : prev.skills,
-          }));
+          setData(mergePortfolioData(res.data));
         }
       } catch (err) {
         console.info("Using embedded portfolio dataset:", err.message);
@@ -315,7 +71,9 @@ function Portfolio() {
               "Associate Software Engineer at Accenture working in big data workflows, ETL/ELT pipelines, and cloud computing. Passionate about turning complex datasets into scalable intelligence while actively applying cybersecurity defense standards."}
           </p>
 
+          <p className="profile-personal-note">B.E. in Information Science and Engineering · CMRIT · 8.42/10 CGPA</p>
           <div className="hero-actions">
+            <a href="/resume/abhishek-shankar-resume.pdf" className="btn-secondary" download>Download Resume ↓</a>
             <a href="#projects" className="btn-primary">
               View Projects
             </a>
@@ -343,12 +101,12 @@ function Portfolio() {
               <span className="cred-value">Accenture (Bengaluru)</span>
             </div>
             <div className="cred-item">
-              <span className="cred-label">Certification</span>
-              <span className="cred-value">Google Cybersecurity</span>
+              <span className="cred-label">Production Reliability</span>
+              <span className="cred-value">100+ recurring job failures resolved</span>
             </div>
             <div className="cred-item">
               <span className="cred-label">Core Stack</span>
-              <span className="cred-value">AWS • Spark • Airflow • Redshift</span>
+              <span className="cred-value">Python • PySpark • SQL • AWS</span>
             </div>
           </div>
         </section>
@@ -384,6 +142,7 @@ function Portfolio() {
                     <p className="exp-desc">{item.description || item.desc}</p>
                   )}
 
+                  {item.highlights?.length > 0 && <ul className="detail-list">{item.highlights.map(point => <li key={point}>{point}</li>)}</ul>}
                   {techList.length > 0 && (
                     <div className="exp-tech-row">
                       <span className="exp-tech-label">Stack:</span>
@@ -406,7 +165,7 @@ function Portfolio() {
             <span className="section-label">Engineering</span>
             <h2 className="section-heading">Featured Projects</h2>
             <p className="section-subheading">
-              Production implementations across full-stack systems, machine learning, and automation.
+              Selected data engineering, machine learning, and full-stack projects. ShopLakehouse is currently in progress.
             </p>
           </div>
 
@@ -415,7 +174,8 @@ function Portfolio() {
               const { narrative, tags } = parseProjectSkills(project.description);
 
               return (
-                <article key={idx} className="project-card">
+                <article key={project.github || idx} className={`project-card ${project.status === "in-progress" ? "project-in-progress" : ""}`}>
+                  <div className="project-status-row"><span>{project.category || "Project"}</span>{project.status === "in-progress" && <span className="progress-badge">In progress</span>}</div>
                   <div>
                     <div className="project-top">
                       <h3 className="project-title">{project.title}</h3>
@@ -440,8 +200,8 @@ function Portfolio() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="icon-btn"
-                            title="Live Application"
-                            aria-label="Live Demo"
+                            title={project.linkLabel || "View project"}
+                            aria-label={`${project.title}: ${project.linkLabel || "View project"}`}
                           >
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -454,6 +214,8 @@ function Portfolio() {
                     </div>
 
                     <p className="project-desc">{narrative}</p>
+                    {project.highlights?.length > 0 && <ul className="detail-list">{project.highlights.map(point => <li key={point}>{point}</li>)}</ul>}
+                    {project.nextSteps?.length > 0 && <div className="next-milestones"><h4>Next milestones</h4><ul className="detail-list">{project.nextSteps.map(point => <li key={point}>{point}</li>)}</ul></div>}
                   </div>
 
                   <div className="project-footer">
@@ -475,7 +237,7 @@ function Portfolio() {
                           rel="noopener noreferrer"
                           className="btn-card-action primary"
                         >
-                          Live App ↗
+                          {project.linkLabel || "View project"} ↗
                         </a>
                       )}
                       {project.github && (
@@ -495,6 +257,8 @@ function Portfolio() {
             })}
           </div>
         </section>
+
+        <Activity />
 
         {/* ================= SKILLS MATRIX ================= */}
         <section id="skills" className="section-wrapper">
@@ -536,6 +300,7 @@ function Portfolio() {
               "Developer Tools & Infrastructure",
               skillsMap.applications || DEFAULT_PORTFOLIO_DATA.skills.applications
             )}
+            {renderSkillCategoryBox("AI Development Tools", skillsMap.aiTools || DEFAULT_PORTFOLIO_DATA.skills.aiTools)}
           </div>
         </section>
 
@@ -545,7 +310,7 @@ function Portfolio() {
             <span className="section-label">Credentials</span>
             <h2 className="section-heading">Certifications</h2>
             <p className="section-subheading">
-              Verified specializations certified by Google in cybersecurity, incident response, and security automation.
+              Courses and certifications across data engineering, infrastructure, system design, and cybersecurity.
             </p>
           </div>
 
@@ -555,6 +320,8 @@ function Portfolio() {
                 <div>
                   <div className="cert-issuer-badge">{cert.issuer || "Google"}</div>
                   <h3 className="cert-name">{cert.name?.trim()}</h3>
+                  {cert.issued && <p className="cert-skills-note">Issued {cert.issued}</p>}
+                  {cert.credentialId && <p className="credential-id">Credential ID: {cert.credentialId}</p>}
                   {cert.skills && <p className="cert-skills-note">{cert.skills}</p>}
                 </div>
 
@@ -565,7 +332,7 @@ function Portfolio() {
                     rel="noopener noreferrer"
                     className="cert-verify-link"
                   >
-                    Verify Credential ↗
+                    {cert.linkLabel || "View credential"} ↗
                   </a>
                 )}
               </div>
@@ -586,11 +353,19 @@ function Portfolio() {
                 <div>
                   <h3 className="edu-degree">{item.degree}</h3>
                   <p className="edu-college">{item.college}</p>
+                  {item.result && <p className="education-result">{item.result}</p>}
                 </div>
                 <span className="edu-year">{item.year}</span>
               </div>
             ))}
           </div>
+          <article className="achievement-panel">
+            <span className="section-label">Achievement · August 2022</span>
+            <h3>Smart India Hackathon 2022 · Final Round</h3>
+            <p>Qualified for the final round with a transportation and logistics application combining local-store ordering with district-level bike and car rentals.</p>
+            <a href="https://www.linkedin.com/in/abhishekshankar27/" target="_blank" rel="noopener noreferrer">View on LinkedIn ↗</a>
+          </article>
+          <p className="profile-personal-note">Beyond engineering: cycling, running, football, badminton, drawing, and video editing.</p>
         </section>
 
         {/* ================= CONTACT SECTION ================= */}
@@ -611,6 +386,7 @@ function Portfolio() {
               </p>
 
               <div className="socials-row">
+                <a href="https://leetcode.com/u/ABHISHEKSHANKAR27/" target="_blank" rel="noopener noreferrer" className="social-link-btn">LeetCode ↗</a>
                 {data.contact?.github && (
                   <a
                     href={data.contact.github}

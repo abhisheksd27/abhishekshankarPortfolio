@@ -1,0 +1,347 @@
+{
+  "home": {
+    "name": "Abhishek Shankar"
+  },
+  "about": {
+    "desc": "I am a Data Engineer and Associate Software Engineer at Accenture in Bengaluru, working with Python, PySpark, SQL, Amazon Redshift, and MySQL. I have permanently resolved 100+ recurring production job failures through root cause analysis and code enhancements. My work includes CEDW data warehousing, SAL/CAL transformation logic, deployment support, and collaboration with clients to investigate data discrepancies."
+  },
+  "experience": [
+    {
+      "_id": "6ae72d93f38a4484192faceb",
+      "role": "Associate Software Engineer · Data Engineer",
+      "company": "Accenture",
+      "duration": "Sep 2024 – Present",
+      "location": "Bengaluru, India",
+      "description": "Enterprise data warehousing, transformation logic, and production reliability for CEDW workflows.",
+      "technologies": [
+        "Python",
+        "PySpark",
+        "SQL",
+        "Amazon Redshift",
+        "MySQL",
+        "ETL / ELT",
+        "IWS"
+      ],
+      "highlights": [
+        "Debugged and optimized Python, PySpark, and SQL workflows, permanently resolving 100+ recurring production job failures across Amazon Redshift and MySQL.",
+        "Implemented new business logic in SAL and CAL data layers to support changing business and reporting requirements.",
+        "Supported deployments and monitored scheduled workflows, investigating failures and restoring processing through root-cause fixes.",
+        "Worked directly with clients and business users to investigate discrepancies, clarify requirements, and communicate findings."
+      ]
+    },
+    {
+      "_id": "6ae72d93f38a4484192facec",
+      "role": "Web Development Freelancer",
+      "company": "Freelance",
+      "duration": "Jan 2024 – Sep 2024",
+      "location": "Remote",
+      "description": "Delivered performant full-stack web applications and custom client portals with responsive architectures, secure JWT/OAuth authentication, and database optimizations.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Tailwind CSS",
+        "REST APIs",
+        "Git & GitHub"
+      ]
+    },
+    {
+      "_id": "6ae72d93f38a4484192faced",
+      "role": "Machine Learning Intern",
+      "company": "Varcons Technologies",
+      "duration": "Feb 2024 – Mar 2024",
+      "location": "Bengaluru, India",
+      "description": "Practical model development, data preparation, and exploratory analysis in Python.",
+      "technologies": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Machine Learning"
+      ],
+      "highlights": [
+        "Implemented K-Nearest Neighbors, Decision Trees, and Gaussian Naive Bayes models.",
+        "Cleaned and preprocessed datasets with Pandas and NumPy, then explored patterns and visualized findings with Matplotlib."
+      ]
+    },
+    {
+      "_id": "6ae72d93f38a4484192facee",
+      "role": "Full-stack Intern",
+      "company": "Webstack Academy - WSA",
+      "duration": "Jan 2024 – Feb 2024",
+      "location": "Bengaluru, India",
+      "description": "Engineered scalable REST APIs, state management pipelines, and robust database models using the MERN stack with modern component architecture.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Redux Toolkit",
+        "Bootstrap / CSS"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.E. in Information Science and Engineering",
+      "college": "CMR Institute of Technology, Bengaluru",
+      "year": "2020 – 2024",
+      "result": "CGPA: 8.42 / 10"
+    },
+    {
+      "degree": "Pre-University · PCMB",
+      "college": "R N Shetty PU College, Kundapura",
+      "year": "2018 – 2020",
+      "result": "83.5% · Physics, Chemistry, Mathematics & Biology"
+    },
+    {
+      "degree": "Secondary School Leaving Certificate",
+      "college": "Government High School, Aloor, Kundapura",
+      "year": "2018",
+      "result": "SSLC: 93.12%"
+    }
+  ],
+  "certification": [
+    {
+      "name": "Data Warehouse Fundamentals",
+      "issuer": "IBM",
+      "link": "/resume/abhishek-shankar-resume.pdf",
+      "linkLabel": "Listed in resume"
+    },
+    {
+      "name": "Introduction to Data Engineering",
+      "issuer": "IBM",
+      "link": "/resume/abhishek-shankar-resume.pdf",
+      "linkLabel": "Listed in resume"
+    },
+    {
+      "name": "Advanced Terraform: Multi-Cloud Production Management",
+      "issuer": "Packt",
+      "link": "/resume/abhishek-shankar-resume.pdf",
+      "linkLabel": "Listed in resume"
+    },
+    {
+      "name": "System Design Fundamentals",
+      "issuer": "Pearson",
+      "link": "/resume/abhishek-shankar-resume.pdf",
+      "linkLabel": "Listed in resume"
+    },
+    {
+      "name": "Google Cybersecurity",
+      "issuer": "Google",
+      "link": "https://coursera.org/share/9685d5eda28b8a2632145987c9675a4b",
+      "image": "http://localhost:5001/uploads/1775824614022-CERTIFICATE_LANDING_PAGE~UTX9AIA5YNER.jpeg",
+      "_id": "69d8eee64e62becb611d92c3",
+      "linkLabel": "View credential"
+    },
+    {
+      "name": "Automate Cybersecurity Tasks with Python",
+      "issuer": "Google",
+      "link": "https://www.coursera.org/account/accomplishments/verify/WOE75EBSP6JU",
+      "image": "http://localhost:5001/uploads/1775825182748-2.jpeg",
+      "_id": "69d8f11e4e62becb611d92e9",
+      "linkLabel": "View credential",
+      "credentialId": "WOE75EBSP6JU",
+      "issued": "January 2026"
+    },
+    {
+      "name": "Sound the Alarm: Detection and Response",
+      "issuer": "Google",
+      "link": "https://www.coursera.org/account/accomplishments/verify/Y8PEGJKW9H5Z",
+      "image": "http://localhost:5001/uploads/1775825317051-3.jpeg",
+      "_id": "69d8f1a54e62becb611d9308",
+      "linkLabel": "View credential",
+      "credentialId": "Y8PEGJKW9H5Z",
+      "issued": "January 2026"
+    },
+    {
+      "name": "Assets, Threats, and Vulnerabilities",
+      "issuer": "Google",
+      "link": "https://www.coursera.org/account/accomplishments/verify/7308ZOCM7TNC",
+      "image": "http://localhost:5001/uploads/1775825452030-4.jpeg",
+      "_id": "69d8f22c4e62becb611d933c",
+      "linkLabel": "View credential",
+      "credentialId": "7308ZOCM7TNC",
+      "issued": "January 2026"
+    },
+    {
+      "name": "Tools of the Trade: Linux and SQL",
+      "issuer": "Google",
+      "link": "https://www.coursera.org/account/accomplishments/verify/PMJAZT6LP6AQ",
+      "image": "http://localhost:5001/uploads/1775825809613-5.jpeg",
+      "_id": "69d8f3914e62becb611d9380",
+      "linkLabel": "View credential",
+      "credentialId": "PMJAZT6LP6AQ",
+      "issued": "December 2025"
+    },
+    {
+      "name": "Put It to Work: Prepare for Cybersecurity Jobs",
+      "issuer": "Google",
+      "issued": "January 2026",
+      "credentialId": "DOHG13I0USGA",
+      "link": "https://www.linkedin.com/in/abhishekshankar27/",
+      "linkLabel": "Listed on LinkedIn"
+    },
+    {
+      "name": "Accelerate Your Job Search with AI",
+      "issuer": "Google",
+      "issued": "January 2026",
+      "credentialId": "BX2HX4Y94E1B",
+      "link": "https://www.linkedin.com/in/abhishekshankar27/",
+      "linkLabel": "Listed on LinkedIn"
+    }
+  ],
+  "projects": [
+    {
+      "title": "UrbanPulse",
+      "category": "Data engineering",
+      "description": "A San Francisco urban mobility data platform combining taxi-trip and weather ingestion, simulated Kafka events, and analytical modeling on AWS.\nSkills: Python, PySpark, AWS, Airflow, dbt, Terraform, Kafka",
+      "github": "https://github.com/abhisheksd27/UrbanPulse",
+      "link": "https://github.com/abhisheksd27/UrbanPulse/blob/main/docs/architecture.md",
+      "linkLabel": "Architecture",
+      "highlights": [
+        "Python ingestion and PySpark Bronze, Silver, and Gold transformations.",
+        "Airflow orchestration, Redshift dbt models, and Terraform infrastructure definitions.",
+        "Ingestion, Spark, DAG, and quality tests with architecture and operational documentation."
+      ]
+    },
+    {
+      "title": "Road Accident Prediction",
+      "category": "Applied machine learning · Academic project",
+      "description": "An academic accident-severity modeling project with preprocessing and classification notebooks, a saved model, and a Flask prediction interface.\nSkills: Python, scikit-learn, Pandas, NumPy, Flask, MySQL, Jupyter",
+      "github": "https://github.com/abhisheksd27/Road-Accident-Prediction-model/tree/main/ASD_Modif",
+      "highlights": [
+        "Prepared accident datasets and explored patterns with Pandas, NumPy, and Matplotlib.",
+        "Compared Decision Tree, Random Forest, KNN, and Gradient Boosting using a 70/30 train-test split.",
+        "Evaluated confusion matrices, precision, recall, and accuracy; connected the saved Gradient Boosting model to Flask."
+      ]
+    },
+    {
+      "title": "DevZone",
+      "category": "Full-stack development",
+      "description": "A MERN publishing platform for blog posts and projects, with search, comments, account flows, and an administrator dashboard.\nSkills: React, Node.js, Express, MongoDB, Redux, Firebase Auth",
+      "github": "https://github.com/abhisheksd27/DevZone",
+      "highlights": [
+        "Email/password and Google sign-in, JWT authentication, and protected routes.",
+        "Post and project creation, editing, and deletion with administrator checks.",
+        "Search, pagination, comments, and light/dark themes."
+      ]
+    },
+    {
+      "title": "PropertEase",
+      "category": "Full-stack development",
+      "description": "A property-listing application connecting a React interface to an Express API and MongoDB, with account-based listing management.\nSkills: React, Node.js, Express, MongoDB, Firebase, Redux",
+      "github": "https://github.com/abhisheksd27/PropertEase",
+      "highlights": [
+        "Listing creation, editing, deletion, image uploads, and property details.",
+        "Search and sorting with sale/rent, parking, furnishing, and offer filters.",
+        "Authentication and ownership checks for listing updates and deletion."
+      ]
+    },
+    {
+      "title": "ShopLakehouse",
+      "category": "Data engineering",
+      "status": "in-progress",
+      "description": "A local-first e-commerce analytics platform in development, with a planned AWS deployment. The pipeline and dashboards are upcoming milestones.\nSkills: PostgreSQL, Docker, Planned: Python / PySpark / dbt / Airflow / AWS",
+      "github": "https://github.com/abhisheksd27/ShopLakehouse",
+      "link": "https://github.com/abhisheksd27/ShopLakehouse/blob/main/docs/progress.md",
+      "linkLabel": "Build progress",
+      "highlights": [
+        "Built: project structure, architecture documentation, and Docker-based PostgreSQL setup.",
+        "Built: customer, category, and product schemas with constraints, indexes, and update triggers."
+      ],
+      "nextSteps": [
+        "Runtime smoke checks and the remaining source tables.",
+        "Python ingestion, MinIO storage, and PySpark transformations.",
+        "dbt models, Airflow scheduling, Metabase dashboards, and AWS deployment."
+      ]
+    }
+  ],
+  "skills": {
+    "programmingLanguages": [
+      "Python",
+      "Javascript",
+      "C Programming",
+      "C++ Programming"
+    ],
+    "fullStack": [
+      "MERN Stack (MongoDB, Express.js, React.js, Node.js)",
+      "Django",
+      "Flask"
+    ],
+    "databases": [
+      "Amazon Redshift",
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB"
+    ],
+    "dataEngineering": [
+      "Python",
+      "PySpark",
+      "SQL",
+      "Apache Spark",
+      "Apache Airflow",
+      "Amazon Redshift",
+      "ETL / ELT",
+      "Data Modeling",
+      "Data Warehousing",
+      "AWS S3 / Glue / Lambda",
+      "Terraform",
+      "dbt",
+      "Kafka",
+      "Hadoop"
+    ],
+    "cyberSecurity": [
+      "Cybersecurity",
+      "Cyber Security Strategy",
+      "Cyber Risk",
+      "Information Assurance",
+      "Data Ethics",
+      "Ethical Standards & Conduct",
+      "Incident Response",
+      "Risk Analysis",
+      "Security Management",
+      "Security Controls",
+      "Threat Management",
+      "Vulnerability & Compliance",
+      "Network Security",
+      "SIEM (Security Information and Event Management)",
+      "Windows Fundamentals",
+      "Linux",
+      "Bash Scripting",
+      "Information security",
+      "InforSec",
+      "Network Foundation",
+      "windows command line"
+    ],
+    "machineLearning": [],
+    "dsa": [],
+    "applications": [
+      "IWS",
+      "AWS",
+      "Airflow",
+      "EKS",
+      "GitHub",
+      "Dbeaver",
+      "Terraform",
+      "Git",
+      "Docker",
+      "Linux"
+    ],
+    "aiTools": [
+      "GenWizard",
+      "Claude Code",
+      "GitHub Copilot",
+      "OpenAI Codex"
+    ]
+  },
+  "contact": {
+    "email": "abhishekdshankar@gmail.com",
+    "phone": "7338006503",
+    "github": "https://github.com/abhisheksd27",
+    "linkedin": "https://www.linkedin.com/in/abhishekshankar27/",
+    "twitter": "",
+    "leetcode": "https://leetcode.com/u/ABHISHEKSHANKAR27/"
+  }
+}

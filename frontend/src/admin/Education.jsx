@@ -43,7 +43,7 @@ function Education() {
       const updated = [...education];
 
       if (editIndex !== null) {
-        updated[editIndex] = { degree, college, year };
+        updated[editIndex] = { ...education[editIndex], degree, college, year };
       } else {
         updated.push({ degree, college, year });
       }

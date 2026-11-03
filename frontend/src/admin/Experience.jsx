@@ -68,7 +68,7 @@ function Experience() {
       const updated = [...experience];
 
       if (editIndex !== null) {
-        updated[editIndex] = newEntry;
+        updated[editIndex] = { ...experience[editIndex], ...newEntry };
       } else {
         updated.push(newEntry);
       }

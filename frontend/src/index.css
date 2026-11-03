@@ -891,3 +891,58 @@ body {
     justify-content: center;
   }
 }
+
+/* Reviewed profile content */
+.profile-personal-note { color: var(--text-muted); font-size: .88rem; margin: 18px 0; }
+.detail-list { padding-left: 18px; margin: 0 0 20px; color: var(--text-body); font-size: .86rem; line-height: 1.7; }
+.detail-list li + li { margin-top: 8px; }
+.detail-list li::marker { color: #93c5fd; }
+.project-status-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; color: var(--text-muted); font-size: .72rem; }
+.progress-badge { display: inline-block; background: #f59e0b14; color: #fbbf24; border: 1px solid #f59e0b40; border-radius: 99px; padding: 3px 9px; font-size: .7rem; white-space: nowrap; }
+.project-in-progress { border-color: #f59e0b40; grid-column: 1 / -1; }
+.project-in-progress .project-desc { max-width: 740px; }
+.next-milestones h4 { font-size: .82rem; margin-bottom: 8px; }
+.project-actions { flex-wrap: wrap; }
+.project-card, .cert-item-card, .profile-activity-card { min-width: 0; }
+.credential-id { font: .72rem var(--font-mono); color: var(--text-muted); overflow-wrap: anywhere; margin-bottom: 16px; }
+.education-result { margin-top: 8px; font: .82rem var(--font-mono); color: #93c5fd; }
+.achievement-panel { margin-top: 24px; padding: 24px; border: 1px solid #3b82f640; border-radius: var(--radius-md); background: #3b82f60a; }
+.achievement-panel h3 { margin-top: 12px; font-size: 1rem; }
+.achievement-panel p { font-size: .88rem; color: var(--text-body); margin: 12px 0; }
+.achievement-panel a, .activity-heading a { color: #93c5fd; text-decoration: none; font-size: .8rem; }
+.profile-activity-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.profile-activity-card { padding: 24px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+.activity-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.activity-heading h3 { font-size: 1rem; }
+.activity-main-stat { display: flex; align-items: baseline; gap: 12px; margin: 20px 0; }
+.activity-main-stat strong { font: 600 2.4rem var(--font-mono); color: var(--text-head); }
+.activity-main-stat span { color: var(--text-muted); font-size: .8rem; }
+.difficulty-list { margin-bottom: 20px; }
+.difficulty-row { display: grid; grid-template-columns: 60px 1fr 36px; align-items: center; gap: 12px; font-size: .8rem; margin-top: 10px; }
+.difficulty-row strong { text-align: right; font-family: var(--font-mono); }
+.difficulty-track { height: 5px; background: var(--border-subtle); border-radius: 8px; overflow: hidden; }
+.difficulty-track div { height: 100%; border-radius: inherit; }
+.activity-stat-list { display: grid; gap: 10px; font-size: .8rem; margin-bottom: 18px; }
+.activity-stat-list div { display: flex; justify-content: space-between; gap: 14px; }
+.activity-stat-list dt { color: var(--text-muted); }
+.activity-stat-list dd { font-family: var(--font-mono); white-space: nowrap; }
+.activity-footnote { font-size: .76rem; color: var(--text-body); line-height: 1.6; margin-top: 10px; }
+.activity-repos { display: grid; gap: 12px; border-top: 1px solid var(--border-subtle); padding-top: 18px; }
+.activity-repos a { color: var(--text-head); text-decoration: none; display: grid; gap: 4px; font-size: .82rem; }
+.activity-repos a > span { font-size: .75rem; color: var(--text-muted); }
+.activity-repos strong .progress-badge { margin-left: 4px; }
+.contact-value-text { overflow-wrap: anywhere; }
+section[id] { scroll-margin-top: 90px; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid #93c5fd; outline-offset: 4px; }
+@media (max-width: 1024px) {
+  .nav-mobile-toggle { display: block; }
+  .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-page); border-bottom: 1px solid var(--border-subtle); padding: 16px; flex-direction: column; align-items: stretch; gap: 4px; display: none; }
+  .nav-links.open { display: flex; }
+  .nav-cta-btn { margin-left: 0; margin-top: 8px; text-align: center; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .profile-activity-grid { grid-template-columns: 1fr; }
+  .projects-grid, .cert-list-grid { grid-template-columns: minmax(0,1fr); }
+  .profile-activity-card, .project-card { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

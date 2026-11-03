@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const portfolioSchema = new mongoose.Schema(
   {
     home: Object,
+    sectionUpdatedAt: { type: Map, of: String, default: {} },
     about: Object,
 
     skills: {
@@ -13,7 +14,8 @@ const portfolioSchema = new mongoose.Schema(
       cyberSecurity: { type: [String], default: [] },
       machineLearning: { type: [String], default: [] },
       dsa: { type: [String], default: [] },
-      applications: { type: [String], default: [] }
+      applications: { type: [String], default: [] },
+      aiTools: { type: [String], default: [] }
     },
     education: Array,
     experience: {
@@ -24,6 +26,7 @@ const portfolioSchema = new mongoose.Schema(
           duration: String,
           location: String,
           description: String,
+          highlights: [String],
           technologies: { type: [String], default: [] }
         }
       ],
@@ -36,7 +39,10 @@ const portfolioSchema = new mongoose.Schema(
           issuer: String,
           link: String,
           image: String,
-          skills: String
+          skills: String,
+          issued: String,
+          credentialId: String,
+          linkLabel: String
         }
       ],
       default: []
@@ -47,7 +53,12 @@ const portfolioSchema = new mongoose.Schema(
           title: String,
           description: String,
           link: String,
-          github: String
+          github: String,
+          category: String,
+          status: { type: String, enum: ["completed", "in-progress"], default: "completed" },
+          highlights: [String],
+          nextSteps: [String],
+          linkLabel: String
         }
       ],
       default: []
@@ -57,6 +68,7 @@ const portfolioSchema = new mongoose.Schema(
       phone: String,
       github: String,
       linkedin: String,
+      leetcode: String,
       twitter: String
     }
   },

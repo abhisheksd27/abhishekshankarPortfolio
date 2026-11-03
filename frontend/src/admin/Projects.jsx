@@ -158,20 +158,30 @@ function Projects() {
             </div>
 
             <div style={field}>
-              <label style={label}>Live Application URL (Optional)</label>
+              <label style={label}>Project or Documentation URL (Optional)</label>
               <input
                 placeholder="https://your-live-deployment.com"
-                value={form.link}
+                value={form.link || ""}
                 onChange={(e) => setForm({ ...form, link: e.target.value })}
                 style={input}
               />
             </div>
 
             <div style={field}>
+              <label style={label}>Project Status</label>
+              <select value={form.status || "completed"} onChange={e => setForm({ ...form, status: e.target.value })} style={input}>
+                <option value="completed">Completed</option><option value="in-progress">In progress</option>
+              </select>
+            </div>
+            <div style={field}>
+              <label style={label}>Link Label</label>
+              <input value={form.linkLabel || ""} placeholder="Architecture, Build progress, or Live app" onChange={e => setForm({ ...form, linkLabel: e.target.value })} style={input} />
+            </div>
+            <div style={field}>
               <label style={label}>GitHub Repository URL</label>
               <input
                 placeholder="https://github.com/abhisheksd27/repository"
-                value={form.github}
+                value={form.github || ""}
                 onChange={(e) => setForm({ ...form, github: e.target.value })}
                 style={input}
               />
@@ -216,7 +226,7 @@ function Projects() {
                         rel="noreferrer"
                         style={link}
                       >
-                        Live Demo ↗
+                        {project.linkLabel || "View project"} ↗
                       </a>
                     )}
 
